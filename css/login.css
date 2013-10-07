@@ -1,0 +1,40 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+/* agregar imagen a el campo de texto de usuario */
+#commentform input.usuario{
+	background-position:left center;
+	padding-left:17px;
+	width:183px;
+	background-image:url(imagenes/user.gif);
+	background-repeat:no-repeat;
+}
+
+#commentform input.usuario[type="text"]:focus{
+	background-color:#FFF;
+	background-position:left center;
+	padding-left:17px;
+	width:183px;
+	background-image:imagenes/user2.gif);
+	background-repeat:no-repeat;
+}
+
+/* agregar imagen a el campo de texto de contraseña */
+#commentform input.contrasena{
+	background-position:left center;
+	padding-left:17px;
+	width:183px;
+	background-image:url(imagenes/password.gif);
+	background-repeat:no-repeat;
+}
+
+#commentform input.contrasena[type="password"]:focus{
+	background-color:#FFF;
+	background-position:left center;
+	padding-left:17px;
+	width:183px;
+	background-image:imagenes/password2.gif);
+	background-repeat:no-repeat;
+}
