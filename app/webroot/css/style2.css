@@ -1,0 +1,132 @@
+/ * Añadir lo que necesita para su restablecimiento CSS * /
+html, body, h 1 , la forma, fieldset, input {
+ Margen : 0 ;
+ padding : 0 ;
+ fronterizo : ninguno ;
+ }
+ 
+ # De registro {
+    Color : # fff ;
+    background : # 2d2d2d ;
+    background :-webkit-gradiente (
+        lineal,
+        izquierda  abajo ,
+        izquierda  arriba ,
+        Color-stop ( 0 , rgb ( 60 , 60 , 60 )),
+        Color-stop ( 0,74 , rgb ( 43 , 43 , 43 )),
+        Color-parada ( 1 , rgb ( 60 , 60 , 60 ))
+        );
+     background :-moz-linear-gradiente (
+        centro de  la parte inferior ,
+        rgb ( 60 , 60 , 60 ), 0% ,
+        rgb ( 43 , 43 , 43 ) 74% ,
+        rgb ( 60 , 60 , 60 ) 100%
+        );
+     -Moz-border-radius: 15px ;
+     -Webkit-border-radius: 15px ;
+     border-radius: 15px ;
+     margen : 10px ;
+     Ancho : 430px ;
+     }
+ 
+ # Inscripción a {
+      Color : # 8c910b ;
+      text-shadow : 0px  -1px  0px  # 000 ;
+      }
+ 
+# Registro fieldset {
+      padding : 35px ;
+      }
+	  
+	  input.text {
+     -Webkit-border-radius: 15px ;
+     -Moz-border-radius: 15px ;
+     border-radius: 15px ;
+     frontera : sólido  1px  # 444 ;
+     font-size : 14px ;
+     Anchura : 90% ;
+     padding : 7px  8px  7px  8px ;
+     background : # ddd ;
+     background :-moz-linear-gradiente (
+          centro de  la parte inferior ,
+          rgb ( 225 , 225 , 225 ), 0% ,
+          rgb ( 215 , 215 , 215 ) 54% ,
+          rgb ( 173 , 173 , 173 ) 100%
+     );
+     background :-webkit-gradiente (
+          lineal,
+          izquierda  abajo ,
+          izquierda  arriba ,
+          Color-stop ( 0 , rgb ( 225 , 225 , 225 )),
+          Color-stop ( 0,54 , rgb ( 215 , 215 , 215 )),
+          Color-parada ( 1 , rgb ( 173 , 173 , 173 ))
+      );
+      de color : # 333 ;
+      text-shadow : 0px  1px  0px  # FFF ;
+      -Moz-box-shadow: 0px  1px  0px  # 777 ;
+      -Webkit-box-shadow: 0px  1px  0px  # 777 ;
+      box-shadow: 0px  1px  0px  # 777 ;
+ }
+ 
+ # Inscripción h 2  {
+Color : # fff ;
+text-shadow : 0px  -1px  0px  # 000 ;
+text-align : centro ;
+padding : 18px ;
+margen : 0px ;
+font-weight : normal, ;
+      font-size : 24px ;
+      font-family : Lucida Grande, Helvetica , Arial , sans-serif ;
+border-bottom : sólido  # 181818  1px ;
+-Moz-box-shadow: 0px  1px  0px  # 3a3a3a ;
+-Webkit-box-shadow: 0px  1px  0px  # 3a3a3a ;
+box-shadow: 0px  1px  0px  # 3a3a3a ;
+      }
+	  
+	  # RegisterNew {
+Ancho : 203px ;
+altura : 40px ;
+fronterizo : ninguno ;
+text-indent : -9999px ;
+background : url ( 'img / createAccountButton.png' ) no-repeat ;
+cursor : Puntero ;
+float : derecho ;
+}
+# RegisterNew: hover { background-position : 0px  -41px ;}
+ # RegisterNew: active { background-position : 0px  -82px ;}
+ 
+ fieldset label.infield / *. etiqueta infield añadido por JS * /  {
+ de color : # 333 ;
+ text-shadow : 0px  1px  0px  # fff ;
+ posición : absoluta ;
+ text-align : izquierda ;
+ top : 3px  ! importantes ;
+ izquierda : 35px  ! importantes ;
+ line-height : 29px ;
+ }
+
+footer { 
+  width: 930px;
+  font: 170% 'Yanone Kaffeesatz', arial, sans-serif;
+  text-shadow: 1px 1px #0D7989;
+  height: 30px;
+  padding: 5px 0 20px 0;
+  text-align: center; 
+  -webkit-border-radius: 13px 13px 13px 13px; 
+  -moz-border-radius: 13px 13px 13px 13px;
+  border-radius: 13px 13px 13px 13px;
+}
+
+footer p { 
+  line-height: 1.7em;
+  padding: 0 0 10px 0;
+}
+
+footer a { 
+  text-decoration: none;
+}
+
+footer a:hover { 
+  text-shadow: none;
+  text-decoration: none;
+}
