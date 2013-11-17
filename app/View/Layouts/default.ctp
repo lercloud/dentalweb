@@ -24,7 +24,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		D-Care - 
+		Dental Arcoiris - 
 		<?php echo $title_for_layout; ?>
 	</title>
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -46,28 +46,34 @@ body {
 		echo $this->Html->css('cake.generic');
 		echo $this->Html->css('style');
 		echo $this->Html->css('style2');
+        echo $this->Html->css('style3');
+        echo $this->Html->css('bootstrap-datetimepicker.min');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+        echo $this->fetch('bootstrap-datetimepicker.min');
 	?>
+
 </head>
 <body>
 
-<header>
-    <a href="#" id="logo">Logo</a>
-    <nav id="menu">
-        <a href="#" class="nav-mobile" id="nav-mobile"></a>
-        <ul id="navv">
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Pacientes</a></li>
-            <li><a href="#">Caja</a></li>
-            <li><a href="#">Laboratorio</a></li>
-            <li><a href="#">Recetas</a></li>
-        </li>
-        </ul>
-    </nav>
-</header>
+           <header>
+            <nav id="menu">
+                <a href="#" class="nav-mobile" id="nav-mobile"></a>
+                <ul id="navv">
+                    <li><a href="/dentalweb">Inicio</a></li>
+                    <li><?php echo $this->Html->link("Pacientes", array("controller"=>"pacientes", "action"=>"index")); ?></li>
+                    <li><a href="#">Caja</a></li>
+                    <li><a href="#">Laboratorio</a></li>
+                    <li><a href="#">Recetas</a></li>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="cerrarSession"><?php echo $this->Html->link('Cerrar Session', array("controller"=>"usuarios", "action"=>"logout")) ?>
+            </div>
+        </header>
 
 	<div id="container">
 		<div id="content">
