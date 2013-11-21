@@ -43,16 +43,22 @@ body {
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
-		echo $this->Html->css('style');
-		echo $this->Html->css('style2');
-        echo $this->Html->css('style3');
+		//echo $this->Html->css('cake.generic');
+		
         echo $this->Html->css('bootstrap-datetimepicker.min');
+        echo $this->Html->css('bootstrap.min');
+        echo $this->Html->css('bootstrap-theme.min');
+        echo $this->Html->css('style');
+        echo $this->Html->css('style2');
+        echo $this->Html->css('style3');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
         echo $this->fetch('bootstrap-datetimepicker.min');
+
+        echo $this->Html->script('bootstrap.min');
+        echo $this->Html->script('customjs');
 	?>
 
 </head>

@@ -1,6 +1,6 @@
 <div class="pacientes index">
 	<h2><?php echo __('Pacientes'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table">
 	<tr>
 			
 			<th><?php echo $this->Paginator->sort('nombre'); ?></th>
@@ -22,10 +22,17 @@
 		<td><?php echo h($paciente['Paciente']['celular']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['nextel']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['email']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $paciente['Paciente']['id'])); ?>
-			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $paciente['Paciente']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $paciente['Paciente']['id']), null, __('Are you sure you want to delete # %s?', $paciente['Paciente']['id'])); ?>
+		<td class="actions ">
+			<div class="btn-group">
+			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			    Action <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu" role="menu">
+			<li><?php echo $this->Html->link(__('Ver'), array('action' => 'view', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+			<li><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+			<li><?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $paciente['Paciente']['id']), array('class'=>'btn-danger', "style"=>"color:#FFF;"), __('Are you sure you want to delete # %s?', $paciente['Paciente']['id'])); ?></li>
+		</ul>
+		</div>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -36,25 +43,29 @@
 	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
 	));
 	?>	</p>
-	<div class="paging">
+	<ul class="paging pager">
 	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+	echo "<li>";
+		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled previous'));
+		echo "</li>";
 		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+		echo "<li>";
+		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled next'));
+		echo '</li>'
 	?>
-	</div>
+	</ul>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Menu'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Nuevo Paciente'), array('action' => 'agregar')); ?></li>
-		<li><?php echo $this->Html->link(__('List Anexos'), array('controller' => 'anexos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Anexo'), array('controller' => 'anexos', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List AntecedentesPatologicos'), array('controller' => 'antecedentesPatologicos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Antecedentes Patologico'), array('controller' => 'antecedentesPatologicos', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List EstadoCuenta'), array('controller' => 'estadoCuenta', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Estado Cuentum'), array('controller' => 'estadoCuenta', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List HistoriaMedicas'), array('controller' => 'historiaMedicas', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Historia Medica'), array('controller' => 'historiaMedicas', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nuevo Paciente'), array('action' => 'agregar'), array('class'=>'btn btn-default')); ?></li>
+		<li><?php echo $this->Html->link(__('List Anexos'), array('controller' => 'anexos', 'action' => 'index'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Anexo'), array('controller' => 'anexos', 'action' => 'add'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('List AntecedentesPatologicos'), array('controller' => 'antecedentesPatologicos', 'action' => 'index'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Antecedentes Patologico'), array('controller' => 'antecedentesPatologicos', 'action' => 'add'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('List EstadoCuenta'), array('controller' => 'estadoCuenta', 'action' => 'index'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Estado Cuentum'), array('controller' => 'estadoCuenta', 'action' => 'add'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('List HistoriaMedicas'), array('controller' => 'historiaMedicas', 'action' => 'index'), array('class'=>'btn btn-default')); ?> </li>
+		<li><?php echo $this->Html->link(__('New Historia Medica'), array('controller' => 'historiaMedicas', 'action' => 'add'), array('class'=>'btn btn-default')); ?> </li>
 	</ul>
 </div>

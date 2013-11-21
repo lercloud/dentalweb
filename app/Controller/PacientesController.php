@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class PacientesController extends AppController {
 
-
+public $uses = array("Paciente", "Patologia");
 
 /**
  * index method
@@ -16,7 +16,8 @@ class PacientesController extends AppController {
  */
 	public function index() {
 		$this->Paciente->recursive = 0;
-		$this->set('pacientes', $this->paginate());
+		//;
+		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
 	}
 
 /**
@@ -40,6 +41,10 @@ class PacientesController extends AppController {
  * @return void
  */
 	public function agregar() {
+
+		$patologias = $this->Paciente->Patologia->find('list', array("fields"=>array("id", "descripcion")));
+			$this->set(compact('patologias'));
+
 		if ($this->request->is('post')) {
 			$this->Paciente->create();
 			if ($this->Paciente->save($this->request->data)) {
@@ -62,8 +67,14 @@ class PacientesController extends AppController {
 		if (!$this->Paciente->exists($id)) {
 			throw new NotFoundException(__('Invalid paciente'));
 		}
+
+		$patologias = $this->Paciente->Patologia->find('list', array("fields"=>array("id", "descripcion")));
+			$this->set(compact('patologias'));
+
+		$this->Paciente->create();
+		$this->Paciente->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Paciente->save($this->request->data)) {
+			if ($this->Paciente->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The paciente has been saved'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
@@ -95,5 +106,26 @@ class PacientesController extends AppController {
 			$this->Session->setFlash(__('The paciente could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function addpatologia(){
+
+		$this->layout = "ajax";
+
+		if ($this->request->is('post') || $this->request->is('put')) {
+
+			$this->Patologia->create();
+			$p["Patologia"]['descripcion'] = $this->request->data["descripcion"];
+
+			if($this->Patologia->save($p)){
+				$this->set('response', $this->Patologia->id);
+			}
+			else{
+				$this->set('response', 'error');
+			}
+
+		}
+
+
 	}
 }

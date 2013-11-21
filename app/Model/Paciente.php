@@ -34,19 +34,6 @@ class Paciente extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'AntecedentesPatologico' => array(
-			'className' => 'AntecedentesPatologico',
-			'foreignKey' => 'paciente_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
 		'EstadoCuentum' => array(
 			'className' => 'EstadoCuentum',
 			'foreignKey' => 'paciente_id',
@@ -74,5 +61,26 @@ class Paciente extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+
+	public $hasAndBelongsToMany = array(
+
+		'Patologia' => array(
+			'className' => 'Patologia',
+			'joinTable' => 'antecedentes_patologicos',
+			'foreignKey' => 'paciente_id',
+			'associationForeignKey' => 'patologia_id',
+			'unique' => 'keepExisting',
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'finderQuery' => '',
+			'deleteQuery' => '',
+			'insertQuery' => ''
+		)
+	);
+
+
 
 }

@@ -18,10 +18,9 @@ class AntecedentesPatologico extends AppModel {
 	public $belongsTo = array(
 		'Paciente' => array(
 			'className' => 'Paciente',
-			'foreignKey' => 'paciente_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)
+		),
+		'Patologia' => array(
+			'className' => 'Patologia',
+		),
 	);
 }
