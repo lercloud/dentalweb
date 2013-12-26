@@ -7,7 +7,7 @@ var patologiaString = $('#PacienteOtraPatologia').val();
 
 
 $.ajax({
-  url: '../../pacientes/addpatologia',
+  url: '../pacientes/addpatologia',
   type: 'POST',
   dataType: 'html',
   data: {descripcion: patologiaString},
@@ -47,6 +47,93 @@ $('#PacienteOtraPatologia').keypress(function(event) {
         $('#addPatologiaBtn').click();
     }
 });
+
+
+$(".deleteHistoria").click(function(event) {
+ $(this).parent().fadeOut('slow/400/fast', function() {
+   
+  $(this).remove();
+
+ });
+});
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  };
+})();
+
+$("body").on("keyup","input#buscarPaciente",function(ev){
+                  //ev.preventDefault();
+           $("#searchStatus").css({
+                  'visibility': 'visible'
+                });
+           delay(function(){
+                  
+              $.ajax({
+                url: 'pacientes/buscarajax/',
+                type: 'POST',
+                dataType: 'html',
+                data: {datasearch: $("input#buscarPaciente").val()},
+              })
+              .done(function(html_response) {
+                
+                $("#pacienteSearchResult").html(html_response);
+                $("#searchStatus").css({
+                  'visibility': 'hidden'
+                });
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+                
+              });
+              
+
+             }, 400 );
+
+                              //return false;
+                  });
+
+
+
+$("body").on("keyup","input#buscarPacienteTratamiento",function(ev){
+                  //ev.preventDefault();
+           $("#searchStatus").css({
+                  'visibility': 'visible'
+                });
+           delay(function(){
+                  
+              $.ajax({
+                url: 'tratamientos/buscarajax/',
+                type: 'POST',
+                dataType: 'html',
+                data: {datasearch: $("input#buscarPacienteTratamiento").val()},
+              })
+              .done(function(html_response) {
+                
+                $("#tratamientoSearchResult").html(html_response);
+                $("#searchStatus").css({
+                  'visibility': 'hidden'
+                });
+              })
+              .fail(function() {
+                console.log("error");
+              })
+              .always(function() {
+                console.log("complete");
+                
+              });
+              
+
+             }, 400 );
+
+                              //return false;
+                  });
 
 
 

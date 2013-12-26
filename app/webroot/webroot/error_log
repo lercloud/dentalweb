@@ -1,0 +1,25 @@
+[15-Nov-2013 02:33:07] PHP Parse error:  syntax error, unexpected '/' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Layouts/default.ctp on line 69
+[15-Nov-2013 08:52:07] PHP Parse error:  syntax error, unexpected ';' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 12
+[15-Nov-2013 09:00:31] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 10
+[18-Nov-2013 14:33:36] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/MantenimientoController.php on line 24
+[18-Nov-2013 14:34:05] PHP Fatal error:  Call to undefined method MantenimientoController::query() in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/MantenimientoController.php on line 22
+[18-Nov-2013 14:34:59] PHP Fatal error:  Call to undefined method MantenimientoController::query() in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/MantenimientoController.php on line 22
+[18-Nov-2013 14:37:17] PHP Fatal error:  Call to a member function set() on a non-object in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/MantenimientoController.php on line 24
+[18-Nov-2013 14:37:42] PHP Fatal error:  Call to a member function query() on a non-object in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/MantenimientoController.php on line 22
+[18-Nov-2013 16:21:02] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 7
+[18-Nov-2013 17:30:49] PHP Parse error:  syntax error, unexpected T_ARRAY in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 7
+[18-Nov-2013 17:31:01] PHP Parse error:  syntax error, unexpected T_ARRAY in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 21
+[18-Nov-2013 17:49:47] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 11
+[18-Nov-2013 17:51:20] PHP Parse error:  syntax error, unexpected ';' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 11
+[19-Nov-2013 03:00:02] PHP Fatal error:  Unsupported operand types in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/lib/Cake/View/Helper/FormHelper.php on line 1396
+[19-Nov-2013 03:00:34] PHP Fatal error:  Unsupported operand types in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/lib/Cake/View/Helper/FormHelper.php on line 1396
+[19-Nov-2013 03:00:48] PHP Fatal error:  Unsupported operand types in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/lib/Cake/View/Helper/FormHelper.php on line 1396
+[19-Nov-2013 10:41:37] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 113
+[19-Nov-2013 10:48:47] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/agregar.ctp on line 113
+[20-Nov-2013 01:58:49] PHP Parse error:  syntax error, unexpected T_ARRAY in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/edit.ctp on line 120
+[20-Nov-2013 02:01:17] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/edit.ctp on line 125
+[20-Nov-2013 16:34:49] PHP Parse error:  syntax error, unexpected $end in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/View/Pacientes/edit.ctp on line 191
+[20-Nov-2013 17:46:17] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/PacientesController.php on line 72
+[20-Nov-2013 17:47:03] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/PacientesController.php on line 73
+[20-Nov-2013 17:47:58] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/PacientesController.php on line 74
+[20-Nov-2013 17:47:59] PHP Parse error:  syntax error, unexpected T_OBJECT_OPERATOR in /home2/rodrigo0/public_html/eddornelas.com/dentalweb/app/Controller/PacientesController.php on line 74

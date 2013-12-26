@@ -59,6 +59,13 @@ class Paciente extends AppModel {
 			'exclusive' => '',
 			'finderQuery' => '',
 			'counterQuery' => ''
+		),
+		'Tratamiento' => array(
+			'className' => 'Tratamiento',
+			'foreignKey' => 'paciente_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

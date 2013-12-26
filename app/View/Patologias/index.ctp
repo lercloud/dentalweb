@@ -1,6 +1,6 @@
 <div class="patologias index">
 	<h2><?php echo __('Patologias'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<table cellpadding="0" cellspacing="0" class="table">
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('descripcion'); ?></th>
@@ -30,6 +30,10 @@
 	?>	</p>
 	<div class="paging">
 	<?php
+
+	//$this->Html->link("string", aregloDireccion, arregloAtributos);
+
+
 		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
 		echo $this->Paginator->numbers(array('separator' => ''));
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
@@ -37,8 +41,10 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Menu'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Patologium'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Nueva Patologia'), array('action' => 'add'), array("class"=>"btn btn-default", "id"=>"nicole")); ?></li>
+
+
 	</ul>
 </div>

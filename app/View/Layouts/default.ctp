@@ -68,12 +68,12 @@ body {
             <nav id="menu">
                 <a href="#" class="nav-mobile" id="nav-mobile"></a>
                 <ul id="navv">
-                    <li><a href="/dentalweb">Inicio</a></li>
+                    <li><a href="/">Inicio</a></li>
                     <li><?php echo $this->Html->link("Pacientes", array("controller"=>"pacientes", "action"=>"index")); ?></li>
-                    <li><a href="#">Caja</a></li>
+                    <li><?php echo $this->Html->link("Cobros", array("controller"=>"tratamientos", "action"=>"index")); ?></li></li>
                     <li><a href="#">Laboratorio</a></li>
                     <li><a href="#">Recetas</a></li>
-                    </li>
+                    <li><?php echo $this->Html->link("Doctores", array("controller"=>"doctors", "action"=>"index")); ?></li>
                 </ul>
             </nav>
 

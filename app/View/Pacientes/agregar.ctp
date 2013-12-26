@@ -1,3 +1,4 @@
+
 <div class="pacientes form">
 <?php echo $this->Form->create('Paciente', array("role"=>"form")); ?>
 
@@ -16,12 +17,13 @@
 		<legend><?php echo __('Datos Generales'); ?></legend>
 	<?php
 
-		echo $this->Form->label('User.fechaAlta', 'Fecha Alta', array("style"=>"clear:left;"));
+		echo $this->Form->label('User.fechaAlta', 'Fecha Alta', array("style"=>"clear:left; float:"));
 		echo '<div style="clear:left;" ></div>';
 		echo $this->Form->date('fechaAlta',array(
 												
 												'class'=>"col-md-4",
 												"style"=>"clear:left;",
+												'required'=>true,
 												'placeholder'=>"Fecha Alta"));
 		echo '<div style="clear:left;" ></div>';
 
@@ -37,6 +39,7 @@
 		echo $this->Form->date('fechaNacimiento',array(
 												
 												'class'=>"col-md-6",
+												'required'=>true,
 												'placeholder'=>"Fecha Alta"));
 		echo '</div>';
 
@@ -44,14 +47,17 @@
 		echo $this->Form->input('nombre', array(
 												"div"=>array("class"=>"col-md-4", "style"=>"clear:left;"),
 												'class'=>"form-control",
+												'required'=>true,
 												'placeholder'=>"Nombre(s)"));
 		echo $this->Form->input('apellido_paterno', array(
 												"div"=>array("class"=>"col-md-4"),
 												'class'=>"form-control",
+												'required'=>true,
 												'placeholder'=>"Apellido Paterno"));
 		echo $this->Form->input('apellido_materno',array(
 												"div"=>array("class"=>"col-md-4"),
 												'class'=>"form-control",
+												'required'=>true,
 												'placeholder'=>"Apellido Materno"));
 		
 
@@ -97,6 +103,11 @@
 
 
 
+		echo $this->Form->hidden('Anexo.id');
+
+
+
+
 
 	?>
 	</fieldset>
@@ -104,13 +115,56 @@
 
 <div class="tab-pane" id="HistoriaMedica" >
 <fieldset>
-	ho
+	
+<?php
+
+$x=0;
+
+ echo $this->Form->input('HistoriaMedica.'.$x.'.padecimiento',array(
+												"div"=>array("class"=>"col-md-6"),
+												'class'=>"form-control",
+												'placeholder'=>"Padecimiento"));
+		echo $this->Form->input('HistoriaMedica.'.$x.'.tratamientoMedico',array(
+												"div"=>array("class"=>"col-md-6"),
+												'class'=>"form-control",
+												'placeholder'=>"Tratamiento Medico"));
+
+
+	?>
 </fieldset>
 </div>
 
 <div class="tab-pane" id="AntecedentesPatologicos" >
 <fieldset>
-	<?php echo $this->Form->input('Patologia.Patologia', array("multiple"=>"checkbox", "hiddenField"=>true, "div"=>array("class"=>"col-md-12", "style"=>"margin-top:5px;"), 'class'=>"col-md-3", "label"=>false)); ?>
+	<div id="PatologiasArea" style="display:inline-block">
+	<?php echo $this->Form->input('Patologia.Patologia', array("multiple"=>"checkbox", "hiddenField"=>true, "div"=>array( "style"=>"margin-top:5px;"), 'class'=>"col-md-3", "label"=>false));
+
+	echo '</div>';// Patologias Area
+
+echo '<div class="col-md-12" style="display:inline-block;" >'; //Addfield
+echo $this->Form->input('otraPatologia',array(
+									"div"=>array("class"=>"col-md-6"),
+									'class'=>"form-control",
+
+									'placeholder'=>"Describir Patologia"));
+
+echo $this->Form->button('Agregar Patologia',array(
+									
+									'class'=>"btn btn-default col-md-3",
+									'style'=>"clear:both;",
+									'id'=>"addPatologiaBtn",
+									'type' => 'button',
+
+									'placeholder'=>"Agregar Patologia"));
+
+echo '</div>'; //Add field
+
+
+	?>
+
+
+
+
 </fieldset>
 </div>
 
@@ -119,9 +173,10 @@
 <?php 
 
 $options = array(
-    'label' => 'Agregar Paciente',
+    'label' => 'Agregar Cliente',
 
-        'class' => 'btn btn-success'
+        'class' => 'btn btn-success',
+        'style' => "margin-top:10px;"
 
 );
 echo $this->Form->end($options);

@@ -2,12 +2,11 @@
 App::uses('AppController', 'Controller');
 /**
  * Pacientes Controller
- 
  * @property Paciente $Paciente
  */
 class PacientesController extends AppController {
 
-public $uses = array("Paciente", "Patologia");
+public $uses = array("Paciente", "Patologia", "Tratamiento");
 
 /**
  * index method
@@ -21,6 +20,24 @@ public $uses = array("Paciente", "Patologia");
 	}
 
 /**
+ * buscarajax method
+ *
+ * @return void
+ */
+	public function buscarajax() {
+		$this->layout = 'ajax';
+		$this->Paciente->recursive = 0;
+		
+		$conditions = array("OR" => array(
+      	"Paciente.nombre LIKE" => $this->request->data["datasearch"]."%",
+        "Paciente.apellido_paterno LIKE" => $this->request->data["datasearch"]."%",
+        "Paciente.apellido_materno LIKE" => $this->request->data["datasearch"]."%")
+    );
+
+		$this->set('pacientes',$this->paginate($conditions));
+	}
+
+/**
  * view method
  *
  * @throws NotFoundException
@@ -31,8 +48,13 @@ public $uses = array("Paciente", "Patologia");
 		if (!$this->Paciente->exists($id)) {
 			throw new NotFoundException(__('Invalid paciente'));
 		}
-		$options = array('conditions' => array('Paciente.' . $this->Paciente->primaryKey => $id));
-		$this->set('paciente', $this->Paciente->find('first', $options));
+		$options = array('conditions' => array('Paciente.' . $this->Paciente->primaryKey => $id), "fields"=>'Paciente.*');
+		$paciente = $this->Paciente->find('first', $options);
+		$tratamientos["Tratamiento"] = $paciente["Tratamiento"];
+		unset($paciente["Tratamiento"]);
+		$this->set('paciente', $paciente);
+
+		$this->set('tratamientos', $this->paginate("Tratamiento", array("Tratamiento.paciente_id"=>$id)));
 	}
 
 /**

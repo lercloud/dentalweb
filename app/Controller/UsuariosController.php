@@ -31,7 +31,7 @@ public function logout() {
 		if($this->Session->read("logueado") == "ok")
 		{
 				$this->Session->setFlash("Ya estabas logueado");
-				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
+				$this->redirect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
 
 		}
 

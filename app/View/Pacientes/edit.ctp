@@ -116,7 +116,8 @@ $count_historias = count($this->request->data["HistoriaMedica"]);
 
 for($x=0; $x<$count_historias;$x++)
 {
-
+	echo '<div>';
+	echo '<button type="button" class="close deleteHistoria" aria-hidden="true">&times;</button>';
  echo $this->Form->input('HistoriaMedica.'.$x.'.padecimiento',array(
 												"div"=>array("class"=>"col-md-6"),
 												'class'=>"form-control",
@@ -128,6 +129,7 @@ for($x=0; $x<$count_historias;$x++)
 
 		echo $this->Form->hidden('HistoriaMedica.'.$x.'.paciente_id', array("value"=>$this->request->data["Paciente"]["id"]));
 		echo $this->Form->input('HistoriaMedica.'.$x.'.id');
+		echo '</div>';
 }
 
 ?>
