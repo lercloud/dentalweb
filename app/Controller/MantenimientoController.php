@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
 
 class MantenimientoController extends AppController {
 
-public $uses = array('Paciente', 'AntecedentesPatologico');
+public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMedica');
 
 /**
  * index method
@@ -22,11 +22,17 @@ public $uses = array('Paciente', 'AntecedentesPatologico');
 		$bakupQuery = '';
 		$bakupQuery .= 'SELECT * FROM paciente as Paciente';
 		$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
+
+		$bakupQuery2 = '';
+		$bakupQuery2 .= 'SELECT *FROM anexos as Anexos';
+		$bakupQuery2 .= ' INNER JOIN historiamedica AS HistoriaM ON Anexos.paciente_idPaciente = HistoriaM.paciente_idPaciente';
 		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
 
 		$datos =  $this->Paciente->query($bakupQuery);
-
 		$pacienteTmp = $datos[0];
+
+		$datos2 = $this->Anexo->query($bakupQuery2);
+		$anexoTmp = $datos2[0];
 
 
 		/*
@@ -50,15 +56,25 @@ public $uses = array('Paciente', 'AntecedentesPatologico');
 
 
 		$paciente= null;
+		$anexo=null;
+
+		//Area anexos
+		$anexo["Paciente"]["Anexos"]["tutorResponsable"] = $anexoTmp["anexoss"]["menorEdad"];
+		$anexo["Paciente"]["Anexos"]["recomendado"] = $anexoTmp["anexoss"]["recomendado"];
+		$anexo["Paciente"]["Anexos"]["tratamientoPasado"] = $anexoTmp["anexoss"]["tratamientoPasado"];
+		$anexo["Paciente"]["Anexos"]["fechaTratamiento"] = $anexoTmp["anexoss"]["cuandoTratamiento"];
+		$anexo["Paciente"]["Anexos"]["motivoVisita"] = $anexoTmp["anexoss"]["motivoVisita"];
+
+		//Area Historia Medica
+		$anexo["Paciente"]["Hisotia_Medicas"]["padecimiento"] = $anexoTmp["historiamedica"]["padecimiento"];
+		$anexo["Paciente"]["Hisotia_Medicas"]["tratamientoMedico"] = $anexoTmp["historiamedica"]["tratamientoMedico"];
 
 
 		//Area Paciente
 		$nombres = explode(" ", $pacienteTmp['Paciente']['nombrePaciente']);
-
 		$paciente["Paciente"]["nombre"] = $nombres[0];
 		$paciente["Paciente"]["apellido_paterno"] = $nombres[1];
 		$paciente["Paciente"]["apellido_materno"] = $nombres[2];
-
 		$paciente["Paciente"]["fechaAlta"] =  $pacienteTmp['Paciente']['fechaAlta'];
 		$paciente["Paciente"]["edad"] = $pacienteTmp['Paciente']['edad'];
 		$paciente["Paciente"]["sexo"] = $pacienteTmp['Paciente']['sexo'];
@@ -146,11 +162,10 @@ public $uses = array('Paciente', 'AntecedentesPatologico');
 
 
 		$this->Paciente->save($paciente);
-
-
-
-
 		$this->set('pacientes', $datos);
+
+		$this->Anexos->save($anexo);
+		$this->set('anexos',$datos2);
 
 	}
 
