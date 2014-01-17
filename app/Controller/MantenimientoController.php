@@ -26,7 +26,7 @@ public $uses = array('Paciente', 'AntecedentesPatologico');
 
 		$datos =  $this->Paciente->query($bakupQuery);
 
-		//$pacienteTmp = $datos[0];
+		$pacienteTmp = $datos[0];
 
 
 		/*
@@ -73,76 +73,76 @@ public $uses = array('Paciente', 'AntecedentesPatologico');
 		//Area Patologia
 
 		if($pacienteTmp["Antecedente_Patologico"]["maloclusion"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  1;
+		$paciente["Paciente"]["Patologia"][] =  1;
 
 		if($pacienteTmp["Antecedente_Patologico"]["anemia"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  2;
+		$paciente["Paciente"]["Patologia"][] =  2;
 
 		if($pacienteTmp["Antecedente_Patologico"]["diabetes"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  3;
+		$paciente["Paciente"]["Patologia"][] =  3;
 
 		if($pacienteTmp["Antecedente_Patologico"]["tuberculosis"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  4;
+		$paciente["Paciente"]["Patologia"][] =  4;
 
 		if($pacienteTmp["Antecedente_Patologico"]["hepatitis"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  5;
+		$paciente["Paciente"]["Patologia"][] =  5;
 
 		if($pacienteTmp["Antecedente_Patologico"]["epilepsia"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  6;
+		$paciente["Paciente"]["Patologia"][] =  6;
 
 		if($pacienteTmp["Antecedente_Patologico"]["efisema"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  7;
+		$paciente["Paciente"]["Patologia"][] =  7;
 
 		if($pacienteTmp["Antecedente_Patologico"]["respiratorios"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  8;
+		$paciente["Paciente"]["Patologia"][] =  8;
 
 		if($pacienteTmp["Antecedente_Patologico"]["coagulacion"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  9;
+		$paciente["Paciente"]["Patologia"][] =  9;
 
 		if($pacienteTmp["Antecedente_Patologico"]["aLtaPresion"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  10;
+		$paciente["Paciente"]["Patologia"][] =  10;
 
 		if($pacienteTmp["Antecedente_Patologico"]["bajaPresion"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  11;
+		$paciente["Paciente"]["Patologia"][] =  11;
 
 		if($pacienteTmp["Antecedente_Patologico"]["marcapasos"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  12;
+		$paciente["Paciente"]["Patologia"][] =  12;
 
 		if($pacienteTmp["Antecedente_Patologico"]["infarto"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  13;
+		$paciente["Paciente"]["Patologia"][] =  13;
 
 		if($pacienteTmp["Antecedente_Patologico"]["anginaPecho"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  14;
+		$paciente["Paciente"]["Patologia"][] =  14;
 
 		if($pacienteTmp["Antecedente_Patologico"]["artritis"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  15;
+		$paciente["Paciente"]["Patologia"][] =  15;
 
 		if($pacienteTmp["Antecedente_Patologico"]["fiebreReumatica"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  16;
+		$paciente["Paciente"]["Patologia"][] =  16;
 
 		if($pacienteTmp["Antecedente_Patologico"]["implantes"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  17;
+		$paciente["Paciente"]["Patologia"][] =  17;
 
 		if($pacienteTmp["Antecedente_Patologico"]["herpes"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  18;
+		$paciente["Paciente"]["Patologia"][] =  18;
 
 		if($pacienteTmp["Antecedente_Patologico"]["leucemia"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  19;
+		$paciente["Paciente"]["Patologia"][] =  19;
 
 		if($pacienteTmp["Antecedente_Patologico"]["lesionesBoca"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  20;
+		$paciente["Paciente"]["Patologia"][] =  20;
 
 		if($pacienteTmp["Antecedente_Patologico"]["asma"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  21;
+		$paciente["Paciente"]["Patologia"][] =  21;
 
 		if($pacienteTmp["Antecedente_Patologico"]["cancer"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  22;
+		$paciente["Paciente"]["Patologia"][] =  22;
 
 		if($pacienteTmp["Antecedente_Patologico"]["radiacion"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  23;
+		$paciente["Paciente"]["Patologia"][] =  23;
 
 		if($pacienteTmp["Antecedente_Patologico"]["VIH"]=="Si")
-		$paciente["Patologia"]["Patologia"][] =  24;
+		$paciente["Paciente"]["Patologia"][] =  24;
 
 
 		$this->Paciente->save($paciente);
