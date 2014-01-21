@@ -24,14 +24,14 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
 
 		$bakupQuery2 = '';
-		$bakupQuery2 .= 'SELECT *FROM anexos as Anexos';
+		$bakupQuery2 .= 'SELECT *FROM anexoss as Anexos';
 		$bakupQuery2 .= ' INNER JOIN historiamedica AS HistoriaM ON Anexos.paciente_idPaciente = HistoriaM.paciente_idPaciente';
 		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
 
 		$datos =  $this->Paciente->query($bakupQuery);
 		$pacienteTmp = $datos[0];
 
-		$datos2 = $this->Anexo->query($bakupQuery2);
+		$datos2 = $this->Anexos->query($bakupQuery2);
 		$anexoTmp = $datos2[0];
 
 
