@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TratamientosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
 
 /**
  * index method
@@ -21,6 +21,14 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
 		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
 	}
 
+
+
+	public function cortedia(){
+
+		$this->Abono->recursive = 2;
+		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"))));
+		$this->set("abonos",$abonos);
+	}
 
 /**
  * buscarajax method

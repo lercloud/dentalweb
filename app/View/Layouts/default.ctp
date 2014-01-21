@@ -38,7 +38,37 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 body {
 	background-image: url(../BG.jpg);
 }
+
+
     </style>
+
+<style type="text/css">
+@media print
+  {
+    .index {
+     float: left !important ;
+     border: 0px !important;
+     width: 95% !important;
+
+    }
+
+    #menu{
+       display: none !important ;
+    }
+
+    #cerrarSession{
+     display: none !important ;
+    }
+
+    .actions{
+     display: none !important ;
+    }
+
+  }
+
+
+</style>
+
 
 	<?php
 		echo $this->Html->meta('icon');
@@ -61,10 +91,12 @@ body {
         echo $this->Html->script('customjs');
 	?>
 
+
+
 </head>
 <body>
 
-           <header>
+           <header >
             <nav id="menu">
                 <a href="#" class="nav-mobile" id="nav-mobile"></a>
                 <ul id="navv">

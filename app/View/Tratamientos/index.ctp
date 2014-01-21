@@ -160,6 +160,7 @@ foreach ($pacientes as $paciente){
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Tratamientos por Pagar'), array('action' => 'index'), array('class'=>'btn btn-default')); ?></li>
+		<li><?php echo $this->Html->link(__('Corte del dia'), array('action' => 'cortedia'), array('class'=>'btn btn-default')); ?></li>
 		
 		
 	</ul>
