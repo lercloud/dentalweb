@@ -22,17 +22,20 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		$bakupQuery = '';
 		$bakupQuery .= 'SELECT * FROM paciente as Paciente';
 		$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
-
-		$bakupQuery2 = '';
-		$bakupQuery2 .= 'SELECT *FROM anexoss as Anexos';
-		$bakupQuery2 .= ' INNER JOIN historiamedica AS HistoriaM ON Anexos.paciente_idPaciente = HistoriaM.paciente_idPaciente';
-		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
+		$bakupQuery .= ' INNER JOIN anexoss AS Anexos ON Paciente.idPaciente = Anexos.paciente_idPaciente';
 
 		$datos =  $this->Paciente->query($bakupQuery);
 		$pacienteTmp = $datos[0];
 
-		$datos2 = $this->Anexos->query($bakupQuery2);
-		$anexoTmp = $datos2[0];
+		//$bakupQuery2 = '';
+		$bakupQuery2 .= 'SELECT * FROM historiamedica as HistoriaM WHERE HistoriaM.paciente_idPaciente = '.$pacienteTmp["Paciente"]["idPaciente"];
+		//$bakupQuery2 .= ' INNER JOIN historiamedica AS HistoriaM ON Anexos.paciente_idPaciente = HistoriaM.paciente_idPaciente';
+		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
+
+		
+
+		$datos2 = $this->Paciente->query($bakupQuery2);
+		$historiaTmp = $datos2[0];
 
 
 		/*
@@ -59,15 +62,15 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		$anexo=null;
 
 		//Area anexos
-		$anexo["Paciente"]["Anexos"]["tutorResponsable"] = $anexoTmp["anexoss"]["menorEdad"];
-		$anexo["Paciente"]["Anexos"]["recomendado"] = $anexoTmp["anexoss"]["recomendado"];
-		$anexo["Paciente"]["Anexos"]["tratamientoPasado"] = $anexoTmp["anexoss"]["tratamientoPasado"];
-		$anexo["Paciente"]["Anexos"]["fechaTratamiento"] = $anexoTmp["anexoss"]["cuandoTratamiento"];
-		$anexo["Paciente"]["Anexos"]["motivoVisita"] = $anexoTmp["anexoss"]["motivoVisita"];
+		$anexo["Anexo"]["tutorResponsable"] = $pacienteTmp["Anexos"]["menorEdad"];
+		$anexo["Anexo"]["recomendado"] = $pacienteTmp["Anexos"]["recomendado"];
+		$anexo["Anexo"]["tratamientoPasado"] = $pacienteTmp["Anexos"]["tratamientoPasado"];
+		$anexo["Anexo"]["fechaTratamiento"] = $pacienteTmp["Anexos"]["cuandoTratamiento"];
+		$anexo["Anexo"]["motivoVisita"] =$pacienteTmp["Anexos"]["motivoVisita"];
 
 		//Area Historia Medica
-		$anexo["Paciente"]["Hisotia_Medicas"]["padecimiento"] = $anexoTmp["historiamedica"]["padecimiento"];
-		$anexo["Paciente"]["Hisotia_Medicas"]["tratamientoMedico"] = $anexoTmp["historiamedica"]["tratamientoMedico"];
+		$anexo["HistoriaMedica"]["padecimiento"] = $historiaTmp["HistoriaM"]["padecimiento"];
+		$anexo["HistoriaMedica"]["tratamientoMedico"] = $historiaTmp["HistoriaM"]["tratamientoMedico"];
 
 
 		//Area Paciente
