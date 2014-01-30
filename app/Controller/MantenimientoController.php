@@ -21,12 +21,12 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 
 		$bakupQuery = '';
 		$bakupQuery .= 'SELECT * FROM paciente as Paciente';
-		$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
-		$bakupQuery .= ' INNER JOIN anexoss AS Anexos ON Paciente.idPaciente = Anexos.paciente_idPaciente';
+		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
+		//$bakupQuery .= ' INNER JOIN anexoss AS Anexos ON Paciente.idPaciente = Anexos.paciente_idPaciente';
 
 		$datos =  $this->Paciente->query($bakupQuery);
 		//$datos3 =  $this->Anexos->query($bakupQuery);
-		$pacienteTmp = $datos[2];
+		$pacienteTmp = $datos;
 		//$pacienteTmp2 = $datos3[0];
 
 
@@ -41,36 +41,42 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		//$historiaTmp = $datos2[0];
 
 
-		/*
+		
 		foreach($datos as $pacienteTmp){
-
-
 		$paciente= null;
 
+		//Area Paciente
 		$nombres = explode(" ", $pacienteTmp['Paciente']['nombrePaciente']);
-
 		$paciente["Paciente"]["nombre"] = $nombres[0];
 		$paciente["Paciente"]["apellido_paterno"] = $nombres[1];
 		$paciente["Paciente"]["apellido_materno"] = $nombres[2];
 		$paciente["Paciente"]["fechaAlta"] =  $pacienteTmp['Paciente']['fechaAlta'];
-
+		$paciente["Paciente"]["edad"] = $pacienteTmp['Paciente']['edad'];
+		$paciente["Paciente"]["sexo"] = $pacienteTmp['Paciente']['sexo'];
+		$paciente["Paciente"]["ocupacion"] = $pacienteTmp['Paciente']['ocupacion'];
+		$paciente["Paciente"]["direccion"] = $pacienteTmp['Paciente']['direccion'];
+		$paciente["Paciente"]["telefono"] = $pacienteTmp['Paciente']['telefono'];
+		$paciente["Paciente"]["celular"] = $pacienteTmp['Paciente']['celular'];
+		$paciente["Paciente"]["nextel"] = $pacienteTmp['Paciente']['nextel'];
+		$paciente["Paciente"]["email"] = $pacienteTmp['Paciente']['email'];
+		//$paciente["Paciente"]["fechaNacimiento"] = $pacienteTmp['Paciente'][''];
 
 		$this->Paciente->save($paciente);
-
+		$this->set('pacientes', $datos);
 		}
-		*/
+		
 
 
-		$paciente= null;
+		/*$paciente= null;
 		$anexo=null;
 		$patologico=null;
 
 		//Area anexos
-		$anexo["Anexos"]["tutorResponsable"] = $pacienteTmp['Anexos']['menorEdad'];
-		$anexo["Anexos"]["recomendado"] = $pacienteTmp['Anexos']['recomendado'];
-		$anexo["Anexos"]["tratamientoPasado"] = $pacienteTmp['Anexos']['tratamientoPasado'];
-		$anexo["Anexos"]["fechaTratamiento"] = $pacienteTmp['Anexos']['cuandoTratamiento'];
-		$anexo["Anexos"]["motivoVisita"] =$pacienteTmp['Anexos']['motivoVisita'];
+		$Paciente["Anexos"]["tutorResponsable"] = $pacienteTmp['Anexos']['menorEdad'];
+		$Paciente["Anexos"]["recomendado"] = $pacienteTmp['Anexos']['recomendado'];
+		$Paciente["Anexos"]["tratamientoPasado"] = $pacienteTmp['Anexos']['tratamientoPasado'];
+		$Paciente["Anexos"]["fechaTratamiento"] = $pacienteTmp['Anexos']['cuandoTratamiento'];
+		$Paciente["Anexos"]["motivoVisita"] =$pacienteTmp['Anexos']['motivoVisita'];
 		//$id=$paciente["Paciente"]["id"];
 		//$anexo["Anexos"]["paciente_id"] =$id;
 
@@ -98,84 +104,84 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		//Area Patologia
 
 		if($pacienteTmp["Antecedente_Patologico"]["maloclusion"]=="Si")
-		$patologico["AntecedentesPatologico"]["patologia_id"] =  1;
+		$paciente["Paciente"]["Patologia"][] =  1;
 
 		if($pacienteTmp["Antecedente_Patologico"]["anemia"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  2;
+		$paciente["Paciente"]["Patologia"][] =  2;
 
 		if($pacienteTmp["Antecedente_Patologico"]["diabetes"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  3;
+		$paciente["Paciente"]["Patologia"][] =  3;
 
 		if($pacienteTmp["Antecedente_Patologico"]["tuberculosis"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  4;
+		$paciente["Paciente"]["Patologia"][] =  4;
 
 		if($pacienteTmp["Antecedente_Patologico"]["hepatitis"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  5;
+		$paciente["Paciente"]["Patologia"][] =  5;
 
 		if($pacienteTmp["Antecedente_Patologico"]["epilepsia"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  6;
+		$paciente["Paciente"]["Patologia"][] =  6;
 
 		if($pacienteTmp["Antecedente_Patologico"]["efisema"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  7;
+		$paciente["Paciente"]["Patologia"][] =  7;
 
 		if($pacienteTmp["Antecedente_Patologico"]["respiratorios"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  8;
+		$paciente["Paciente"]["Patologia"][] =  8;
 
 		if($pacienteTmp["Antecedente_Patologico"]["coagulacion"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  9;
+		$paciente["Paciente"]["Patologia"][] =  9;
 
 		if($pacienteTmp["Antecedente_Patologico"]["altaPresion"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  10;
+		$paciente["Paciente"]["Patologia"][] =  10;
 
 		if($pacienteTmp["Antecedente_Patologico"]["bajaPresion"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  11;
+		$paciente["Paciente"]["Patologia"][] =  11;
 
 		if($pacienteTmp["Antecedente_Patologico"]["marcapasos"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  12;
+		$paciente["Paciente"]["Patologia"][] =  12;
 
 		if($pacienteTmp["Antecedente_Patologico"]["infarto"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  13;
+		$paciente["Paciente"]["Patologia"][] =  13;
 
 		if($pacienteTmp["Antecedente_Patologico"]["anginaPecho"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  14;
+		$paciente["Paciente"]["Patologia"][] =  14;
 
 		if($pacienteTmp["Antecedente_Patologico"]["artritis"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  15;
+		$paciente["Paciente"]["Patologia"][] =  15;
 
 		if($pacienteTmp["Antecedente_Patologico"]["fiebreReumatica"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  16;
+		$paciente["Paciente"]["Patologia"][] =  16;
 
 		if($pacienteTmp["Antecedente_Patologico"]["implantes"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  17;
+		$paciente["Paciente"]["Patologia"][] =  17;
 
 		if($pacienteTmp["Antecedente_Patologico"]["herpes"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  18;
+		$paciente["Paciente"]["Patologia"][] =  18;
 
 		if($pacienteTmp["Antecedente_Patologico"]["leucemia"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  19;
+		$paciente["Paciente"]["Patologia"][] =  19;
 
 		if($pacienteTmp["Antecedente_Patologico"]["lesionesBoca"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  20;
+		$paciente["Paciente"]["Patologia"][] =  20;
 
 		if($pacienteTmp["Antecedente_Patologico"]["asma"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  21;
+		$paciente["Paciente"]["Patologia"][] =  21;
 
 		if($pacienteTmp["Antecedente_Patologico"]["cancer"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  22;
+		$paciente["Paciente"]["Patologia"][] =  22;
 
 		if($pacienteTmp["Antecedente_Patologico"]["radiacion"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  23;
+		$paciente["Paciente"]["Patologia"][] =  23;
 
 		if($pacienteTmp["Antecedente_Patologico"]["VIH"]=="Si")
-		$patologico["AntecedentesPatologico"]["Patologia"][] =  24;
+		$paciente["Paciente"]["Patologia"][] =  24;*/
 
 
-		$this->Paciente->save($paciente);
-		$this->set('pacientes', $datos);
-		$this->Anexos->save($anexo);
-		$this->set('anexos', $datos);
-		$this->AntecedentesPatologico->save($patologico);
-		$this->set('antecedentes_patologicos', $datos);
+		//$this->Paciente->save($paciente);
+		//$this->set('pacientes', $datos);
+		//$this->Anexos->save($paciente);
+		//$this->set('anexos', $datos);
+		//$this->AntecedentesPatologico->save($paciente);
+		//$this->set('antecedentes_patologicos', $datos);
 
 		/*$this->Anexos->save($paciente);
 		$this->set('anexos', $datos3);

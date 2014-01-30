@@ -192,7 +192,7 @@ echo '</div>'; //Add field
 <?php 
 
 $options = array(
-    'label' => 'Editar Cliente',
+    'label' => 'Editar Paciente',
 
         'class' => 'btn btn-success',
         'style' => "margin-top:10px;"

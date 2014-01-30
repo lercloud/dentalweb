@@ -39,7 +39,7 @@
 		echo $this->Form->date('fechaNacimiento',array(
 												
 												'class'=>"col-md-6",
-												'required'=>true,
+												'required'=>false,
 												'placeholder'=>"Fecha Alta"));
 		echo '</div>';
 
@@ -173,7 +173,7 @@ echo '</div>'; //Add field
 <?php 
 
 $options = array(
-    'label' => 'Agregar Cliente',
+    'label' => 'Agregar Paciente',
 
         'class' => 'btn btn-success',
         'style' => "margin-top:10px;"

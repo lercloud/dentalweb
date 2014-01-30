@@ -22,7 +22,7 @@
 		
 		echo $this->Form->input('id');
 
-		echo $this->Form->input('categoria',array("options"=>array("brakets"=>"Brakets", "otros"=>"Otros"), 'class'=>"form-control",
+		echo $this->Form->input('categoria',array("options"=>array("brakets"=>"Ortodoncia", "otros"=>"Odontologia Integral"), 'class'=>"form-control",
 												"style"=>"clear:both;", "div"=>"col-md-7"));
 
 		
