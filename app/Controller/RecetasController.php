@@ -2,12 +2,11 @@
 App::uses('AppController', 'Controller');
 /**
  * Pacientes Controller
- 
  * @property Paciente $Paciente
  */
-class PacientesController extends AppController {
+class RecetasController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Receta", "Medicamento");
 
 /**
  * index method
@@ -15,26 +14,10 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function index() {
-		$this->Paciente->recursive = 0;
+		$this->Receta->recursive = 0;
 		//;
-		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
+		$this->set('recetas', $this->Receta->find('all'),$this->paginate());
 	}
-
-	/**
- * edadCalcular method
- *
- * @return void
- */
-	/*public function edadCalcular($dob) {
-		$this->set
-		$tdate=date("Y-m-d");
-		$age = 0;
-        while( $tdate > $dob = strtotime('+1 year', $dob)){
-                ++$age;
-        }
-        return $age;
-	}
-*/
 
 /**
  * buscarajax method

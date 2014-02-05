@@ -24,4 +24,16 @@ class Doctor extends AppModel {
 			'order' => ''
 		)
 	);
+
+
+public $hasMany = array(
+		'Abono' => array(
+			'className' => 'Abono',
+			'foreignKey' => 'doctor_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+
 }

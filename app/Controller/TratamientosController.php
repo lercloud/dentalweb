@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TratamientosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono, Usuario");
 
 /**
  * index method
@@ -25,8 +25,9 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
 
 	public function cortedia(){
 
-		$this->Abono->recursive = 2;
-		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"))));
+			$this->Abono->recursive = 2;
+		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d")))); //, "Usuario.id"=>$this->Session->read("sucursal")    //   , "Abono.sucursal_id"=>$this->Session->read("sucursal")
+		//$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"))));
 		$this->set("abonos",$abonos);
 	}
 
@@ -72,6 +73,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
 			throw new NotFoundException(__('Invalid tratamiento'));
 		}
 		$options = array('conditions' => array('Tratamiento.' . $this->Tratamiento->primaryKey => $id));
+		$this->Tratamiento->recursive = 2;
 		$this->set('tratamiento', $this->Tratamiento->find('first', $options));
 	}
 
@@ -106,8 +108,10 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
 		$this->Paciente->recursive = 0;
 		$this->set("paciente",$this->Paciente->find('first', array('conditions'=>array("Paciente.id"=>$pacienteid))));
 
+		//Busqueda y set de doctores
 		$doctors = $this->Tratamiento->Doctor->find('list', array("fields"=>array("id","nombre")));
 		$this->set(compact('doctors'));
+		$this->set("variable", 5);
 	}
 
 /**

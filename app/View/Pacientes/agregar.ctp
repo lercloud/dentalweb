@@ -52,12 +52,12 @@
 		echo $this->Form->input('apellido_paterno', array(
 												"div"=>array("class"=>"col-md-4"),
 												'class'=>"form-control",
-												'required'=>true,
+												'required'=>false,
 												'placeholder'=>"Apellido Paterno"));
 		echo $this->Form->input('apellido_materno',array(
 												"div"=>array("class"=>"col-md-4"),
 												'class'=>"form-control",
-												'required'=>true,
+												'required'=>false,
 												'placeholder'=>"Apellido Materno"));
 		
 

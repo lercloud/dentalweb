@@ -72,6 +72,7 @@
 		<th><?php echo __('FechaTransaccion'); ?></th>
 		<th><?php echo __('Descripcion'); ?></th>
 		<th><?php echo __('Metodo Pago'); ?></th>
+		<th><?php echo __('Doctor'); ?></th>
 
 	</tr>
 	<?php
@@ -83,11 +84,14 @@
 			<td><?php echo $abono['fechaTransaccion']; ?></td>
 			<td><?php echo $abono['descripcion']; ?></td>
 			<td><?php echo $abono['metodoPago']; ?></td>
+			<td><?php echo $abono['Doctor']['nombre']; ?></td>
 			
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
+
+<!-- <pre><?php echo print_r($tratamiento, true); ?></pre> -->
 
 </div>
 

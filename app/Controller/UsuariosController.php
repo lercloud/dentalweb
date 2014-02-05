@@ -31,17 +31,20 @@ public function logout() {
 		if($this->Session->read("logueado") == "ok")
 		{
 				$this->Session->setFlash("Ya estabas logueado");
-				$this->redirect('/', array('controller' => 'pages', 'action' => 'display', 'home'));
+				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
 
 		}
 
 		
 		if ($this->request->is('post')) {
 			
-			if($this->Usuario->find('first', array("conditions"=>array("user"=>$this->request->data['Usuario']['user'], "password"=>$this->request->data['Usuario']['password']))))
+			$usuarioExiste = $this->Usuario->find('first', array("conditions"=>array("user"=>$this->request->data['Usuario']['user'], "password"=>$this->request->data['Usuario']['password'])));
+
+			if($usuarioExiste)
 			{	$this->Session->setFlash("Has hecho login");
 				$this->Session->write("logueado", "ok");
-				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
+				//$this->Session->write("sucursal", $usuarioExiste["Usuario"]["sucursal"]);
+				//$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
 
 			}
 			else

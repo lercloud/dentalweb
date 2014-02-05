@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class AbonosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario");
 
 /**
  * index method
@@ -19,4 +19,136 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono");
 		$this->set('abonos', $this->paginate());
 	}
 
+/**
+ * view method
+ *
+ * @throws NotFoundException
+ * @param int id
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->Abono->exists($id)) {
+			throw new NotFoundException(__('Invalid abono'));
+		}
+		$options = array('conditions' => array('Abono.' . $this->Abono->primaryKey => $id));
+		$this->set('abono', $this->Abono->find('first', $options));
+	}
+
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add($id = null) {
+		if (!$this->Tratamiento->exists($id)) {
+			throw new NotFoundException(__('Tratamiento Invalido'));
+		}
+
+		if ($this->request->is('post')) {
+			$this->Abono->create();
+
+			$tratamiento = $this->Abono->Tratamiento->find('first', array("conditions"=>array("Tratamiento.id"=>$id)));
+			//$sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$ids)));
+			//$this->request->data["Abono"]["sucursal_id"] = $usuario['Usuario']['sucursal'];
+			$abonado = 0;
+				foreach ($tratamiento["Abono"] as $abono) {
+					$abonado += $abono["cantidad"];
+				}
+
+			if($this->request->data["Abono"]["cantidad"]<0){
+				$this->Session->setFlash("La cantidad a abonar introducida no es valida");
+			}else
+				if(($this->request->data["Abono"]["cantidad"]+$abonado) > $tratamiento['Tratamiento']['costoTratamiento']){
+
+					$this->Session->setFlash("El abono introducido excede de el saldo pendiente a pagar");
+				}
+				else
+					if ($this->Abono->save($this->request->data)) {
+
+						//$this->request->data["Abono"]["sucursal_id"] = $usuario['Usuario']['sucursal'];
+
+						if(($this->request->data["Abono"]["cantidad"]+$abonado) == $tratamiento['Tratamiento']['costoTratamiento']){
+
+						$this->Abono->Tratamiento->id = $id;
+						//$this->Abono->Usuario->sucursal = $ids;
+						//$this->Abono->Usuario->save(array("Usuario"=>array("sucursal"=>$ids)));
+						$this->Abono->Tratamiento->save(array("Tratamiento"=>array("liquidado"=>true, "id"=>$id)));
+						$this->Session->setFlash(__('The abono ha sido guardado y el tratamiento liquidado'));
+						}else
+							$this->Session->setFlash(__('The abono ha sido guardado'));
+					
+					return $this->redirect(array('action' => 'view', 'controller'=>'tratamientos',$id));
+			
+						} else {
+							$this->Session->setFlash(__('El abono no pudo ser guardado.'));
+						}
+
+
+
+		}
+		$tratamiento = $this->Abono->Tratamiento->find('first', array("conditions"=>array("Tratamiento.id"=>$id)));
+		$this->set(compact('tratamiento'));
+
+		//Busqueda y set de doctores
+		$doctors = $this->Tratamiento->Doctor->find('list', array("fields"=>array("id","nombre")));
+		$this->set(compact('doctors'));		
+
+		//echo $sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
+
+		//$sucursal = $this->Session->read("sucursal");
+		$sucursal = $this->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
+		//$this->Abono->Usuario->find('list', array("fields"=>array("id","sucursal")));
+		//$this->set('abonos.sucursal_id',$sucursal);
+		$this->set(compact('sucursal'));	
+
+		$this->set("variable", 5);
+	}
+
+/**
+ * edit method
+ *
+ * @throws NotFoundException
+ * @param int id
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->Abono->exists($id)) {
+			throw new NotFoundException(__('Invalid abono'));
+		}
+		if ($this->request->is('post') || $this->request->is('put')) {
+			if ($this->Abono->save($this->request->data)) {
+				$this->Session->setFlash(__('The abono has been saved'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The abono could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('Abono.' . $this->Abono->primaryKey => $id));
+			$this->request->data = $this->Abono->find('first', $options);
+		}
+		$tratamientos = $this->Abono->Tratamiento->find('list');
+		$this->set(compact('tratamientos'));
+	}
+
+/**
+ * delete method
+ *
+ * @throws NotFoundException
+ * @throws MethodNotAllowedException
+ * @param int id
+ * @return void
+ */
+	public function delete($id = null) {
+		$this->Abono->id = $id;
+		if (!$this->Abono->exists()) {
+			throw new NotFoundException(__('Invalid abono'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Abono->delete()) {
+			$this->Session->setFlash(__('The abono has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The abono could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
 }

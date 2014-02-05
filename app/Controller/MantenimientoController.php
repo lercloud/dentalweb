@@ -19,6 +19,8 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 	public function migracion(){
 
 
+		//$this->Paciente-setSchema("test");
+
 		$bakupQuery = '';
 		$bakupQuery .= 'SELECT * FROM paciente as Paciente';
 		//$bakupQuery .= ' INNER JOIN antecedentespatologicos AS Antecedente_Patologico ON Paciente.idPaciente = Antecedente_Patologico.paciente_idPaciente';
@@ -26,7 +28,7 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 
 		$datos =  $this->Paciente->query($bakupQuery);
 		//$datos3 =  $this->Anexos->query($bakupQuery);
-		$pacienteTmp = $datos;
+		//$pacienteTmp = $datos;
 		//$pacienteTmp2 = $datos3[0];
 
 
@@ -40,16 +42,27 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		//$datos2 = $this->Paciente->query($bakupQuery2);
 		//$historiaTmp = $datos2[0];
 
+foreach($datos as $pacienteTmp){
+		//	if (isset($nombres[0])) {
+				# code...
+		//	}
 
-		
-		foreach($datos as $pacienteTmp){
+		$this->Paciente->create();
 		$paciente= null;
 
 		//Area Paciente
 		$nombres = explode(" ", $pacienteTmp['Paciente']['nombrePaciente']);
+
+		
+		if (isset($nombres[0]))
 		$paciente["Paciente"]["nombre"] = $nombres[0];
+
+		if (isset($nombres[1]))
 		$paciente["Paciente"]["apellido_paterno"] = $nombres[1];
+
+		if (isset($nombres[2]))
 		$paciente["Paciente"]["apellido_materno"] = $nombres[2];
+
 		$paciente["Paciente"]["fechaAlta"] =  $pacienteTmp['Paciente']['fechaAlta'];
 		$paciente["Paciente"]["edad"] = $pacienteTmp['Paciente']['edad'];
 		$paciente["Paciente"]["sexo"] = $pacienteTmp['Paciente']['sexo'];
@@ -61,12 +74,20 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		$paciente["Paciente"]["email"] = $pacienteTmp['Paciente']['email'];
 		//$paciente["Paciente"]["fechaNacimiento"] = $pacienteTmp['Paciente'][''];
 
+	
+
 		$this->Paciente->save($paciente);
-		$this->set('pacientes', $datos);
+		//$this->Paciente->id = ultimoIdGenerado;
+		//$this->set('pacientes', $datos);
 		}
 		
+		
+		
+		$this->set('pacientes', $datos);
 
+ }
 
+ }
 		/*$paciente= null;
 		$anexo=null;
 		$patologico=null;
@@ -189,8 +210,6 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 
 		$this->Anexos->save($anexo);
 		$this->set('anexos',$datos2);*/
+	
 
-	}
 
-
-}

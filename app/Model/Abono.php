@@ -22,6 +22,20 @@ class Abono extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Usuario' => array(
+			'className' => 'Usuario',
+			'foreignKey' => 'sucursal_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Doctor' => array(
+			'className' => 'Doctor',
+			'foreignKey' => 'doctor_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 }

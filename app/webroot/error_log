@@ -1,0 +1,19 @@
+[04-Dec-2013 14:01:53] PHP Parse error:  syntax error, unexpected ';' in /home1/denarc/public_html/intranet/app/Controller/TratamientosController.php on line 66
+[04-Dec-2013 15:26:52] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home1/denarc/public_html/intranet/app/View/Pacientes/index.ctp on line 46
+[04-Dec-2013 15:30:54] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /home1/denarc/public_html/intranet/app/View/Tratamientos/add.ctp on line 22
+[04-Dec-2013 15:50:51] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home1/denarc/public_html/intranet/app/Controller/TratamientosController.php on line 20
+[04-Dec-2013 15:54:39] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home1/denarc/public_html/intranet/app/Controller/TratamientosController.php on line 20
+[04-Dec-2013 16:09:05] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home1/denarc/public_html/intranet/app/View/Tratamientos/add.ctp on line 71
+[05-Dec-2013 05:14:10] PHP Parse error:  syntax error, unexpected T_ARRAY in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 7
+[05-Dec-2013 05:27:39] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 74
+[05-Dec-2013 05:27:57] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 74
+[05-Dec-2013 05:28:23] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 74
+[05-Dec-2013 05:28:42] PHP Parse error:  syntax error, unexpected ')', expecting ',' or ';' in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 74
+[05-Dec-2013 05:39:33] PHP Parse error:  syntax error, unexpected T_DOUBLE_ARROW in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 13
+[05-Dec-2013 05:40:56] PHP Parse error:  syntax error, unexpected ';' in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 18
+[14-Dec-2013 02:07:32] PHP Parse error:  syntax error, unexpected T_ECHO in /home1/denarc/public_html/intranet/app/View/Abonos/add.ctp on line 13
+[14-Dec-2013 02:28:48] PHP Parse error:  syntax error, unexpected '}' in /home1/denarc/public_html/intranet/app/Controller/AbonosController.php on line 59
+[14-Dec-2013 02:29:17] PHP Parse error:  syntax error, unexpected T_IS_EQUAL in /home1/denarc/public_html/intranet/app/Controller/AbonosController.php on line 67
+[14-Dec-2013 02:29:53] PHP Fatal error:  Call to undefined method SessionComponent::alert() in /home1/denarc/public_html/intranet/app/Controller/AbonosController.php on line 58
+[20-Jan-2014 14:08:19] PHP Parse error:  syntax error, unexpected T_STRING, expecting T_VARIABLE in /home1/denarc/public_html/intranet/app/Controller/TratamientosController.php on line 26
+[20-Jan-2014 14:29:54] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home1/denarc/public_html/intranet/app/View/Tratamientos/cortedia.ctp on line 15

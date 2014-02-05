@@ -2,12 +2,11 @@
 App::uses('AppController', 'Controller');
 /**
  * Pacientes Controller
- 
  * @property Paciente $Paciente
  */
-class PacientesController extends AppController {
+class MedicamentosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Receta", "Medicamento");
 
 /**
  * index method
@@ -15,26 +14,10 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function index() {
-		$this->Paciente->recursive = 0;
+		$this->Medicamento->recursive = 0;
 		//;
-		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
+		$this->set('medicamentos', $this->Medicamento->find('all'),$this->paginate());
 	}
-
-	/**
- * edadCalcular method
- *
- * @return void
- */
-	/*public function edadCalcular($dob) {
-		$this->set
-		$tdate=date("Y-m-d");
-		$age = 0;
-        while( $tdate > $dob = strtotime('+1 year', $dob)){
-                ++$age;
-        }
-        return $age;
-	}
-*/
 
 /**
  * buscarajax method
@@ -43,7 +26,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  */
 	public function buscarajax() {
 		$this->layout = 'ajax';
-		$this->Paciente->recursive = 0;
+		$this->Medicamento->recursive = 0;
 		
 		$conditions = array("OR" => array(
       	"Paciente.nombre LIKE" => $this->request->data["datasearch"]."%",
@@ -62,16 +45,14 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Paciente->exists($id)) {
+		if (!$this->Medicamento->exists($id)) {
 			throw new NotFoundException(__('Invalid paciente'));
 		}
-		$options = array('conditions' => array('Paciente.' . $this->Paciente->primaryKey => $id), "fields"=>'Paciente.*');
-		$paciente = $this->Paciente->find('first', $options);
-		$tratamientos["Tratamiento"] = $paciente["Tratamiento"];
-		unset($paciente["Tratamiento"]);
-		$this->set('paciente', $paciente);
+		$options = array('conditions' => array('Medicamento.' . $this->Medicamento->primaryKey => $id), "fields"=>'Medicamento.*');
+		$medicamento = $this->Medicamento->find('first', $options);
+		
 
-		$this->set('tratamientos', $this->paginate("Tratamiento", array("Tratamiento.paciente_id"=>$id)));
+		$this->set("medicamento",$medicamento);
 	}
 
 /**
@@ -79,18 +60,17 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  *
  * @return void
  */
-	public function agregar() {
+	public function add() {
 
-		$patologias = $this->Paciente->Patologia->find('list', array("fields"=>array("id", "descripcion")));
-			$this->set(compact('patologias'));
+		
 
 		if ($this->request->is('post')) {
-			$this->Paciente->create();
-			if ($this->Paciente->save($this->request->data)) {
-				$this->Session->setFlash(__('The paciente has been saved'));
+			$this->Medicamento->create();
+			if ($this->Medicamento->save($this->request->data)) {
+				$this->Session->setFlash(__('Se ha guardado medicamento'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The paciente could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Error al agregar medicamento'));
 			}
 		}
 	}
@@ -103,25 +83,24 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function edit($id = null) {
-		if (!$this->Paciente->exists($id)) {
+		if (!$this->Medicamento->exists($id)) {
 			throw new NotFoundException(__('Invalid paciente'));
 		}
 
-		$patologias = $this->Paciente->Patologia->find('list', array("fields"=>array("id", "descripcion")));
-			$this->set(compact('patologias'));
+		
 
-		$this->Paciente->create();
-		$this->Paciente->id = $id;
+		$this->Medicamento->create();
+		$this->Medicamento->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Paciente->saveAll($this->request->data)) {
+			if ($this->Medicamento->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The paciente has been saved'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The paciente could not be saved. Please, try again.'));
 			}
 		} else {
-			$options = array('conditions' => array('Paciente.' . $this->Paciente->primaryKey => $id));
-			$this->request->data = $this->Paciente->find('first', $options);
+			$options = array('conditions' => array('Medicamento.' . $this->Medicamento->primaryKey => $id));
+			$this->request->data = $this->Medicamento->find('first', $options);
 		}
 	}
 
@@ -134,12 +113,12 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function delete($id = null) {
-		$this->Paciente->id = $id;
-		if (!$this->Paciente->exists()) {
+		$this->Medicamento->id = $id;
+		if (!$this->Medicamento->exists()) {
 			throw new NotFoundException(__('Invalid paciente'));
 		}
 		$this->request->onlyAllow('post', 'delete');
-		if ($this->Paciente->delete()) {
+		if ($this->Medicamento->delete()) {
 			$this->Session->setFlash(__('The paciente has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The paciente could not be deleted. Please, try again.'));

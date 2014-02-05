@@ -31,7 +31,10 @@ class Tratamiento extends AppModel {
 			'fields' => '',
 			'order' => ''
 		)
+		
 	);
+
+
 
 /**
  * hasMany associations

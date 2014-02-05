@@ -16,11 +16,20 @@ $abonado = 0;
 		echo $this->Form->hidden('tratamiento_id',array(
 												"div"=>array("class"=>"col-md-6"),
 												'class'=>"form-control", "value"=>$tratamiento['Tratamiento']['id']));
+		echo $this->Form->hidden('sucursal_id',array(
+												"div"=>array("class"=>"col-md-6"),
+												'class'=>"form-control", "value"=>$sucursal['Usuario']['sucursal']));
 		echo $this->Form->input('cantidad',array(
 												"div"=>array("class"=>"col-md-6"),
 												'class'=>"form-control",
 												'required'=>true
 												));
+
+		echo $this->Form->input('doctor_id', array(
+												"div"=>array("class"=>"col-md-7"),
+												'class'=>"form-control",
+												
+												'placeholder'=>"Doctor"));
 
 
 		echo '<div class="col-md-6" >';
@@ -42,7 +51,7 @@ $abonado = 0;
 
 		echo $this->Form->input('metodoPago',array(
 												"div"=>array("class"=>"col-md-6"),
-												'class'=>"form-control", 'options'=>array("Efectivo"=>"Efectivo", "Cheque"=>"Cheque", "Tarjeta"=>"Tarjeta", "Dollar"=>"Dollar")));
+												'class'=>"form-control", 'options'=>array("Efectivo"=>"Efectivo", "Cheque"=>"Cheque", "Tarjeta"=>"Tarjeta", "Dolares"=>"Dolares")));
 	?>
 	</fieldset>
 <?php $options = array(

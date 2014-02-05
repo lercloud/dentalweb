@@ -1,7 +1,7 @@
 <div class="tratamientos form">
 <?php echo $this->Form->create('Tratamiento'); ?>
 	<fieldset>
-		<legend><?php echo __('Form Tratamiento'); ?></legend>
+		<legend><?php echo __('Tratamiento'); ?></legend>
 
 
 
@@ -33,7 +33,6 @@
 												
 												'class'=>"col-md-4",
 												"style"=>"clear:left;",
-												'required'=>true,
 												'placeholder'=>"Fecha Transaccion"));
 		echo '<div style="clear:left;" ></div>';
 

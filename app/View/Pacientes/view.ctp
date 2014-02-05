@@ -79,8 +79,8 @@ padding-left: 0px;
 <ul class="col-md-12" >
 <?php 
 if(count($paciente["Patologia"])<=0){
-	echo "No tiene patologias";
-}else
+	 //echo "No tiene patologias"; 
+}else 
 foreach($paciente["Patologia"] as $patologia){ ?>
 
 <li class="col-md-3" ><?php echo $patologia["descripcion"]; ?></li>
@@ -119,12 +119,22 @@ foreach($paciente["HistoriaMedica"] as $historiaMedica)
 
 <table cellpadding="0" cellspacing="0" class="table table-hover table-striped">
 	<tr>
+		<!-- 
 			<th><?php echo $this->Paginator->sort('fechaTransaccion'); ?></th>
 			<th><?php echo $this->Paginator->sort('costoTratamiento'); ?></th>
 			<th><?php echo $this->Paginator->sort('mensualidad'); ?></th>
 			<th>Abonado</th>
 			<th><?php echo $this->Paginator->sort('liquidado'); ?></th>
 			<th><?php echo $this->Paginator->sort('categoria'); ?></th>
+			<th class="actions"><?php echo __('Actions'); ?></th> 
+		-->
+			<th>Fecha de Transacción</th>
+			<th>Costo de Tratamiento</th>
+			<th>Descripción</th>
+			<th>Mensualidad</th>
+			<th>Abonado</th>
+			<th>Liquidado</th>
+			<th>Categoria</th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($tratamientos as $tratamiento): ?>
@@ -132,6 +142,7 @@ foreach($paciente["HistoriaMedica"] as $historiaMedica)
 		
 		<td><?php echo h($tratamiento['Tratamiento']['fechaTransaccion']); ?>&nbsp;</td>
 		<td><?php echo h($tratamiento['Tratamiento']['costoTratamiento']); ?>&nbsp;</td>
+		<td><?php echo h($tratamiento['Tratamiento']['descripcion']); ?>&nbsp;</td>
 		<td><?php echo h($tratamiento['Tratamiento']['mensualidad']); ?>&nbsp;</td>
 
 		<td><?php $abonado =0.0; foreach($tratamiento['Abono'] as $abono){
