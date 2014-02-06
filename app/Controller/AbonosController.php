@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class AbonosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario", "Sucursal");
 
 /**
  * index method
@@ -48,31 +48,38 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 			$this->Abono->create();
 
 			$tratamiento = $this->Abono->Tratamiento->find('first', array("conditions"=>array("Tratamiento.id"=>$id)));
+<<<<<<< HEAD
 			//$sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$ids)));
 			//$this->request->data["Abono"]["sucursal_id"] = $usuario['Usuario']['sucursal'];
 			$this->request->data["Abono"]["sucursal_id"] = $this->Session->read("sucursal");
+=======
+>>>>>>> 0ce310af2d8adb8db097cfb1699c7fe23b0df291
 			$abonado = 0;
 				foreach ($tratamiento["Abono"] as $abono) {
 					$abonado += $abono["cantidad"];
 				}
 
-			if($this->request->data["Abono"]["cantidad"]<0){
+				//Obtenemos la sucursal en base a nuestro usuario, la sucursal se guarda al hacer login
+				//Y debemos leerla desde la session
+			$sucursalId = $this->Session->read("sucursal");
+
+			//Al abono le metemos el id de sucursal
+			$this->request->data["Abono"]["sucursal_id"] = $sucursalId;
+
+
+			if($this->request->data["Abono"]["cantidad"]<0){ //Revisamos que el abono sea correcto
 				$this->Session->setFlash("La cantidad a abonar introducida no es valida");
 			}else
 				if(($this->request->data["Abono"]["cantidad"]+$abonado) > $tratamiento['Tratamiento']['costoTratamiento']){
-
+					//revisamos que no exceda el abono al saldo
 					$this->Session->setFlash("El abono introducido excede de el saldo pendiente a pagar");
 				}
 				else
 					if ($this->Abono->save($this->request->data)) {
-
-						//$this->request->data["Abono"]["sucursal_id"] = $usuario['Usuario']['sucursal'];
-
+						//procedemos a guardar el abono
 						if(($this->request->data["Abono"]["cantidad"]+$abonado) == $tratamiento['Tratamiento']['costoTratamiento']){
 
 						$this->Abono->Tratamiento->id = $id;
-						//$this->Abono->Usuario->sucursal = $ids;
-						//$this->Abono->Usuario->save(array("Usuario"=>array("sucursal"=>$ids)));
 						$this->Abono->Tratamiento->save(array("Tratamiento"=>array("liquidado"=>true, "id"=>$id)));
 						$this->Session->setFlash(__('The abono ha sido guardado y el tratamiento liquidado'));
 						}else
@@ -87,6 +94,8 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 
 
 		}
+
+		//Sacar informacion tratamiento para mostrar
 		$tratamiento = $this->Abono->Tratamiento->find('first', array("conditions"=>array("Tratamiento.id"=>$id)));
 		$this->set(compact('tratamiento'));
 
@@ -94,6 +103,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		$doctors = $this->Tratamiento->Doctor->find('list', array("fields"=>array("id","nombre")));
 		$this->set(compact('doctors'));		
 
+<<<<<<< HEAD
 		//echo $sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
 
 		//$sucursal = $this->Session->read("sucursal");
@@ -101,8 +111,12 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		//$this->Abono->Usuario->find('list', array("fields"=>array("id","sucursal")));
 		//$this->set('abonos.sucursal_id',$sucursal);
 		$this->set(compact('sucursal'));	
+=======
+		//Busqueda y set de sucursales ya que tengas sucursales
+		//$sucursales = $this->Sucursal->find('list', array("fields"=>array("id","nombre")));	
+		//$this->set(compact('sucursales'));	
+>>>>>>> 0ce310af2d8adb8db097cfb1699c7fe23b0df291
 
-		$this->set("variable", 5);
 	}
 
 /**
