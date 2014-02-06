@@ -50,6 +50,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 			$tratamiento = $this->Abono->Tratamiento->find('first', array("conditions"=>array("Tratamiento.id"=>$id)));
 			//$sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$ids)));
 			//$this->request->data["Abono"]["sucursal_id"] = $usuario['Usuario']['sucursal'];
+			$this->request->data["Abono"]["sucursal_id"] = $this->Session->read("sucursal");
 			$abonado = 0;
 				foreach ($tratamiento["Abono"] as $abono) {
 					$abonado += $abono["cantidad"];
@@ -96,7 +97,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		//echo $sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
 
 		//$sucursal = $this->Session->read("sucursal");
-		$sucursal = $this->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
+		$sucursal = $this->Abono->Usuario->find('first', array("conditions"=>array("Usuario.sucursal"=>$id)));
 		//$this->Abono->Usuario->find('list', array("fields"=>array("id","sucursal")));
 		//$this->set('abonos.sucursal_id',$sucursal);
 		$this->set(compact('sucursal'));	

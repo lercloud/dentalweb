@@ -31,7 +31,7 @@
 												"div"=>array("class"=>"col-md-4 form-group"),
 												
 												'placeholder'=>"Fecha Alta",
-												'options'=>array('M'=>'Masculino', 'F'=>"Femenino")));
+												'options'=>array('Masculino'=>'Masculino', 'Femenino'=>"Femenino")));
 
 		echo '<div class="col-md-6">';
 		echo $this->Form->label('User.fechaNacimiento', 'Fecha Nacimiento');

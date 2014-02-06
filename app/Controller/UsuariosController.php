@@ -44,7 +44,7 @@ public function logout() {
 			{	$this->Session->setFlash("Has hecho login");
 				$this->Session->write("logueado", "ok");
 				//$this->Session->write("sucursal", $usuarioExiste["Usuario"]["sucursal"]);
-				//$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
+				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
 
 			}
 			else

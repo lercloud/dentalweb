@@ -15,26 +15,25 @@ echo $this->Form->input("buscarPaciente",array(
 	<div id="pacienteSearchResult" >
 	<table cellpadding="0" cellspacing="0" class="table">
 	<tr>
-			
+			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('nombre'); ?></th>
 			<th><?php echo $this->Paginator->sort('apellido_paterno'); ?></th>
 			<th><?php echo $this->Paginator->sort('apellido_materno'); ?></th>
 			<th><?php echo $this->Paginator->sort('telefono'); ?></th>
 			<th><?php echo $this->Paginator->sort('celular'); ?></th>
 			<th><?php echo $this->Paginator->sort('nextel'); ?></th>
-			<th><?php echo $this->Paginator->sort('email'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($pacientes as $paciente): ?>
 	<tr>
 		
+		<td><?php echo h($paciente['Paciente']['id']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['nombre']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['apellido_paterno']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['apellido_materno']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['telefono']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['celular']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['nextel']); ?>&nbsp;</td>
-		<td><?php echo h($paciente['Paciente']['email']); ?>&nbsp;</td>
 		<td class="actions ">
 			<div class="btn-group">
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
