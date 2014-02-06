@@ -10,15 +10,16 @@ App::uses('AppModel', 'Model');
  */
 class Usuario extends AppModel {
 
-public $hasMany = array(
-		'Abono' => array(
-			'className' => 'Abono',
+/*
+public $belongsTo = array(
+		'Sucursal' => array(
+			'className' => 'Sucursal',
 			'foreignKey' => 'sucursal_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
 	);
-
+*/
 
 }
