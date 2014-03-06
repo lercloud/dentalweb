@@ -2,10 +2,21 @@
 App::uses('AppController', 'Controller');
 /**
  * Usuarios Controller
- 
  * @property Usuarios $Paciente
  */
 class UsuariosController extends AppController {
+
+
+public function beforeFilter() {
+    parent::beforeFilter();
+
+    // For CakePHP 2.0
+   // $this->Auth->allow('*');
+
+    // For CakePHP 2.1 and up
+    $this->Auth->allow();
+}
+
 
 /**
  * index method
@@ -20,14 +31,20 @@ class UsuariosController extends AppController {
 
 public function logout() {
 
-		$this->Session->delete("logueado");
-		$this->redirect(array("controller"=>"usuarios", "action"=>"login"));
+	//	$this->Session->delete("logueado");
+	//	$this->redirect(array("controller"=>"usuarios", "action"=>"login"));
+	}
+
+public function admin_logout() {
+
+		//$this->Session->delete("logueado");
+		//$this->redirect(array("controller"=>"usuarios", "action"=>"login"));
 	}
 
 
-	public function login() {
+public function admin_login() {
 
-
+/*
 		if($this->Session->read("logueado") == "ok")
 		{
 				$this->Session->setFlash("Ya estabas logueado");
@@ -38,23 +55,58 @@ public function logout() {
 		
 		if ($this->request->is('post')) {
 			
-			$usuarioExiste = $this->Usuario->find('first', array("conditions"=>array("user"=>$this->request->data['Usuario']['user'], "password"=>$this->request->data['Usuario']['password'])));
-
-			if($usuarioExiste)
+			if($this->Usuario->find('first', array("conditions"=>array("user"=>$this->request->data['Usuario']['user'], "password"=>$this->request->data['Usuario']['password']))))
 			{	$this->Session->setFlash("Has hecho login");
 				$this->Session->write("logueado", "ok");
-<<<<<<< HEAD
-				//$this->Session->write("sucursal", $usuarioExiste["Usuario"]["sucursal"]);
 				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
-=======
-				$this->Session->write("sucursal", $usuarioExiste["Usuario"]["sucursal"]);
-				//$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
->>>>>>> 0ce310af2d8adb8db097cfb1699c7fe23b0df291
 
 			}
 			else
 				$this->Session->setFlash("Login Incorrecto");
 		}
+*/
+
+		if ($this->request->is('post')) {
+	        if ($this->Auth->login()) {
+	            return $this->redirect($this->Auth->redirect());
+	        }
+	        $this->Session->setFlash(__('Your username or password was incorrect.'));
+    	}
+
+    	$this->render("login");
+	}
+
+
+	public function login() {
+
+/*
+		if($this->Session->read("logueado") == "ok")
+		{
+				$this->Session->setFlash("Ya estabas logueado");
+				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
+
+		}
+
+		
+		if ($this->request->is('post')) {
+			
+			if($this->Usuario->find('first', array("conditions"=>array("user"=>$this->request->data['Usuario']['user'], "password"=>$this->request->data['Usuario']['password']))))
+			{	$this->Session->setFlash("Has hecho login");
+				$this->Session->write("logueado", "ok");
+				$this->redirect(array("controller"=>"pacientes", "action"=>"index"));
+
+			}
+			else
+				$this->Session->setFlash("Login Incorrecto");
+		}
+*/
+
+		if ($this->request->is('post')) {
+	        if ($this->Auth->login()) {
+	            return $this->redirect($this->Auth->redirect());
+	        }
+	        $this->Session->setFlash(__('Your username or password was incorrect.'));
+    	}
 
 
 	}

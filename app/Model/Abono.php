@@ -22,17 +22,24 @@ class Abono extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
-		)/*,
-		'Sucursal' => array(
-			'className' => 'Sucursal',
-			'foreignKey' => 'sucursal_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		)*/,
+		),
 		'Doctor' => array(
 			'className' => 'Doctor',
 			'foreignKey' => 'doctor_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Branch' => array(
+			'className' => 'Branch',
+			'foreignKey' => 'branch_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

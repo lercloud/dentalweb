@@ -2,7 +2,6 @@
 App::uses('AppController', 'Controller');
 /**
  * Pacientes Controller
- 
  * @property Paciente $Paciente
  */
 class PacientesController extends AppController {

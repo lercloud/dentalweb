@@ -27,8 +27,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		Dental Arcoiris - 
 		<?php echo $title_for_layout; ?>
 	</title>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
  <link href='http://fonts.googleapis.com/css?family=Open+Sans:600,700' rel='stylesheet' type='text/css'>
 
  <style type="text/css">
@@ -81,6 +81,9 @@ body {
         echo $this->Html->css('style');
         echo $this->Html->css('style2');
         echo $this->Html->css('style3');
+        echo $this->Html->css('acl');
+        echo $this->Html->css('/font-awesome/css/font-awesome.min');
+        echo $this->Html->css('/select2/select2');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -89,9 +92,18 @@ body {
 
         echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('customjs');
+        echo $this->Html->script('/select2/select2');
 	?>
 
+<script>
+        $(document).ready(function() {
 
+            $(".select2").select2();
+
+
+
+        });
+    </script>
 
 </head>
 <body>
@@ -100,16 +112,24 @@ body {
             <nav id="menu">
                 <a href="#" class="nav-mobile" id="nav-mobile"></a>
                 <ul id="navv">
-                    <li><a href="/">Inicio</a></li>
+                    <li><a href="<?php echo $this->webroot; ?>">Inicio</a></li>
                     <li><?php echo $this->Html->link("Pacientes", array("controller"=>"pacientes", "action"=>"index")); ?></li>
                     <li><?php echo $this->Html->link("Cobros", array("controller"=>"tratamientos", "action"=>"index")); ?></li></li>
-                    <li><a href="#">Laboratorio</a></li>
-                    <li><a href="#">Recetas</a></li>
+                    
+                    <li><?php echo $this->Html->link("Recetas", array("controller"=>"prescriptions", "action"=>"index")); ?></li>
                     <li><?php echo $this->Html->link("Doctores", array("controller"=>"doctors", "action"=>"index")); ?></li>
+
+                    <?php if($this->Session->read("Auth.User.group_id")==1){ ?>
+
+                    <li><?php echo $this->Html->link("Usuarios", array("controller"=>"users", "action"=>"index")); ?></li>
+                    <li><?php echo $this->Html->link("Sucursales", array("controller"=>"branches", "action"=>"index")); ?></li>
+
+                    <?php } ?>
+
                 </ul>
             </nav>
 
-            <div id="cerrarSession"><?php echo $this->Html->link('Cerrar Session', array("controller"=>"usuarios", "action"=>"logout")) ?>
+            <div id="cerrarSession"><?php echo $this->Html->link('Cerrar Session', array("controller"=>"users", "action"=>"logout")) ?>
             </div>
         </header>
 
@@ -122,7 +142,15 @@ body {
 		</div>
 	</div>
 <footer>
+    
 	<?php //echo $this->element('sql_dump'); ?>
+    <pre style="clear:both;"><?php 
+    if($this->Session->read("var1")!='') echo print_r($this->Session->read("var1"),true);
+    if($this->Session->read("var2")!='') echo print_r($this->Session->read("var2"),true);
+    //if($this->Session->read("var3")!='') echo print_r($this->Session->read("var3"),true);
+    
+    echo Configure::version();
+     ?></pre>
     </footer>
 
 <script src="

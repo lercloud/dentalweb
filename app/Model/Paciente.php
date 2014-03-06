@@ -11,6 +11,10 @@ App::uses('AppModel', 'Model');
 class Paciente extends AppModel {
 
 
+	public $virtualFields = array(
+"fullName" => "CONCAT(Paciente.nombre,' ',Paciente.apellido_paterno,' ',Paciente.apellido_materno)"
+);
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**

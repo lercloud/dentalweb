@@ -31,20 +31,30 @@ App::uses('Controller', 'Controller');
  * @package		app.Controller
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
+
 class AppController extends Controller {
 
 
+var $components = array('Session', 'Auth');
 
-public function beforeFilter(){
 
-	if($this->request['controller']!="usuarios" && $this->request['action']!="login")
-	if($this->Session->read("logueado")!="ok")
-	{
-		$this->Session->setFlash("No tienes permisos");
-		$this->redirect(array("controller"=>"usuarios", "action"=>"login"));
+    public function beforeFilter() {
 
-	}
-}
+        
+        //Configure AuthComponent
+        $this->Auth->loginAction = array(
+          'controller' => 'users',
+          'action' => 'login'
+        );
+        $this->Auth->logoutRedirect = array(
+          'controller' => 'users',
+          'action' => 'login'
+        );
+        $this->Auth->loginRedirect = array(
+          'controller' => 'pacientes',
+          'action' => 'index'
+        );
+    }
 
 
 }

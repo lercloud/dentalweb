@@ -1,20 +1,21 @@
 <h1>Login</h1>
 
 <?php
-echo $this->Form->create('Usuario', array("role"=>"form")); 
+echo $this->Form->create('User', array("role"=>"form")); 
 
 ?>
 <div class="form-group">
 <?php
 
-echo $this->Form->input("user",array(
-												"div"=>array("class"=>"col-md-7"),
-												'class'=>"form-control",
-												'placeholder'=>"User"));
-echo $this->Form->input("password",array(
-												"div"=>array("class"=>"col-md-7", "style"=>"clear:both;"),
-												'class'=>"form-control",
-												'placeholder'=>"Password"));
+	echo $this->Form->input("username",array(
+	"div"=>array("class"=>"col-md-7"),
+	'class'=>"form-control",
+	'placeholder'=>"User"));
+
+	echo $this->Form->input("password",array(
+	"div"=>array("class"=>"col-md-7", "style"=>"clear:both;"),
+	'class'=>"form-control",
+	'placeholder'=>"Password"));
 
 
 $options = array(
@@ -28,7 +29,3 @@ echo $this->Form->end($options);
 ?>
 
 </div>
-
-<?php
-
-?>

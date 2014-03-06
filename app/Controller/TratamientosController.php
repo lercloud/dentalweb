@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TratamientosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono, Usuario");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario");
 
 /**
  * index method
@@ -26,7 +26,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono, Usuario");
 	public function cortedia(){
 
 			$this->Abono->recursive = 2;
-		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d")))); //, "Usuario.id"=>$this->Session->read("sucursal")    //   , "Abono.sucursal_id"=>$this->Session->read("sucursal")
+		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"), "Abono.branch_id"=>$this->Session->read("Auth.User.branch_id")))); //, "Usuario.id"=>$this->Session->read("sucursal")    //   , "Abono.sucursal_id"=>$this->Session->read("sucursal")
 		//$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"))));
 		$this->set("abonos",$abonos);
 	}

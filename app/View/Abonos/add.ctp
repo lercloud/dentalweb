@@ -14,16 +14,14 @@ $abonado = 0;
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->hidden('tratamiento_id',array(
-												"div"=>array("class"=>"col-md-6"),
-												'class'=>"form-control", "value"=>$tratamiento['Tratamiento']['id']));
-		echo $this->Form->hidden('sucursal_id',array(
-												"div"=>array("class"=>"col-md-6"),
-												'class'=>"form-control", "value"=>$sucursal['Usuario']['sucursal']));
+				"div"=>array("class"=>"col-md-6"),
+				'class'=>"form-control", "value"=>$tratamiento['Tratamiento']['id']));
+		
 		echo $this->Form->input('cantidad',array(
-												"div"=>array("class"=>"col-md-6"),
-												'class'=>"form-control",
-												'required'=>true
-												));
+				"div"=>array("class"=>"col-md-6"),
+				'class'=>"form-control",
+				'required'=>true
+				));
 
 		echo $this->Form->input('doctor_id', array(
 												"div"=>array("class"=>"col-md-7"),
