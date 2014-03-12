@@ -33,6 +33,13 @@ public $hasMany = array(
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
+		),
+		'Appointment' => array(
+			'className' => 'Appointment',
+			'foreignKey' => 'doctor_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
 		)
 	);
 

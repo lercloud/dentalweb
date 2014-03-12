@@ -32,6 +32,17 @@ class PrescriptionsController extends AppController {
 		$this->set('prescription', $this->Prescription->find('first', $options));
 	}
 
+
+	public function toprint($id = null) {
+		if (!$this->Prescription->exists($id)) {
+			throw new NotFoundException(__('Invalid prescription'));
+		}
+		$options = array('conditions' => array('Prescription.' . $this->Prescription->primaryKey => $id));
+		$this->set('prescription', $this->Prescription->find('first', $options));
+	}
+
+
+
 /**
  * add method
  *

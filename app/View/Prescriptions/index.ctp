@@ -13,6 +13,7 @@
 		<td><?php echo h($prescription['Paciente']['fullName']); ?>&nbsp;</td>
 		<td><?php echo h($prescription['Prescription']['created']); ?>&nbsp;</td>
 		<td class="actions">
+			<?php echo $this->Html->link(__('Para impresion'), array('action' => 'toprint', $prescription['Prescription']['id'])); ?>
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $prescription['Prescription']['id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $prescription['Prescription']['id'])); ?>
 			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $prescription['Prescription']['id']), null, __('Are you sure you want to delete # %s?', $prescription['Prescription']['id'])); ?>

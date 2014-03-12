@@ -28,6 +28,9 @@ class Branch extends AppModel {
 	public $hasMany = array(
 		'Abono' => array(
 			'className' => 'Abono'
+		),
+		'Appointment' => array(
+			'className' => 'Appointment'
 		));
 
 }

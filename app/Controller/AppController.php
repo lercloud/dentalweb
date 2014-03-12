@@ -35,7 +35,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 
-var $components = array('Session', 'Auth');
+var $components = array('Session', 'Auth','RequestHandler');
 
 
     public function beforeFilter() {

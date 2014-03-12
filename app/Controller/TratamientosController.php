@@ -111,7 +111,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		//Busqueda y set de doctores
 		$doctors = $this->Tratamiento->Doctor->find('list', array("fields"=>array("id","nombre")));
 		$this->set(compact('doctors'));
-		$this->set("variable", 5);
+		//$this->set("variable", 5);
 	}
 
 /**

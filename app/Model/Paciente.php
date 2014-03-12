@@ -71,6 +71,14 @@ class Paciente extends AppModel {
 			'fields' => '',
 			'order' => ''
 		)
+		,
+		'Appointment' => array(
+			'className' => 'Appointment',
+			'foreignKey' => 'paciente_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
 	);
 
 	public $hasAndBelongsToMany = array(

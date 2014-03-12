@@ -609,3 +609,135 @@ margin-bottom: 20px;
 border: 1px solid transparent;
 border-radius: 4px;
 }
+
+
+#prescriptionArea{
+
+    width: 1000px;
+    min-height: 500px;
+
+}
+
+#prescriptionHeader{
+    width: 950px;
+    margin: 10px auto;
+    min-height: 200px;
+    border-bottom: 2px solid;
+}
+
+#prescriptionContent{
+    width: 950px;
+    margin: 10px auto;
+    min-height: 200px;
+}
+
+#prescriptionFooter{
+    width: 950px;
+    margin: 10px auto;
+    min-height: 200px;
+}
+
+#prescriptionLogo{
+    float: left;
+
+}
+
+#prescriptionTitles{
+    float: right;
+    margin-top: 50px;
+    width: 550px;
+
+}
+
+#prescriptionTopTitle{
+    display: inline-block;
+    border-bottom: solid 5px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 8px 18px;
+    font-weight: normal;
+    margin-right: 5px;
+
+}
+
+#prescriptionBottomTitle{
+    text-align: center;
+    margin: 0 27px;
+    width: 440px;
+    display: inline-block;
+}
+
+#prescriptionCompanyName{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#prescriptionPersonalInfo{
+    float: left;
+}
+
+#prescriptionPacient, #prescriptionDate, #prescriptionAge{
+    width: 450px;
+    float: left;
+    display: inline-block;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#prescriptionPacient span, #prescriptionDate span, #prescriptionAge span{
+    font-size: 15px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+#prescriptionMedicaments{
+    margin-top: 20px;
+    float: left;
+    clear: both;
+    width: 100%;
+    min-height: 200px;
+}
+
+#prescriptionMedicaments span{
+    float: left;
+    clear: both;
+    width: 100%;
+}
+
+#prescriptionMedicamentsList{
+    float: left;
+    width: 100%;
+    font-size: 15px;
+}
+
+.prescriptionMedicamentElement{
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.prescriptionMedicamentName{
+    float: left;
+}
+
+.prescriptionMedicamentPresentation{
+    float: left;
+}
+
+.prescriptionMedicamentInstructions{
+    float: left;
+    clear: both;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+#prescriptionFooterInfo{
+    float: left;
+}
+
+#prescriptionFooterSignature{
+    float: right;
+    border-top: 2px solid;
+    width: 250px;
+    text-align: center;
+}
