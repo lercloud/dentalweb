@@ -594,6 +594,7 @@ body {
                     <li><?php echo $this->Html->link("Recetas", array("controller"=>"prescriptions", "action"=>"index")); ?></li>
                     <li><?php echo $this->Html->link("Citas", array("controller"=>"appointments", "action"=>"index")); ?></li>
                     <li><?php echo $this->Html->link("Doctores", array("controller"=>"doctors", "action"=>"index")); ?></li>
+                    <li><?php echo $this->Html->link("Laboratorios", array("controller"=>"laboratories", "action"=>"index")); ?></li>
 
                     <?php if($this->Session->read("Auth.User.group_id")==1){ ?>
 
