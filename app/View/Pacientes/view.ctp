@@ -34,7 +34,7 @@ padding-left: 0px;
 		</div>
 		<div class="campo col-md-4 panel panel-default" ><div class="panel-heading"><h3 class="panel-title"><?php echo __('Edad'); ?>
 		
-			</div><div class="panel-body"><?php echo h($paciente['Paciente']['edad']); ?>
+			</div><div class="panel-body"><?php echo h($paciente['Paciente']['age']); ?>
 			</div>
 		</div>
 		<div class="campo col-md-4 panel panel-default" ><div class="panel-heading"><h3 class="panel-title"><?php echo __('Sexo'); ?>
@@ -131,7 +131,6 @@ foreach($paciente["HistoriaMedica"] as $historiaMedica)
 			<th>Fecha de Transacción</th>
 			<th>Costo de Tratamiento</th>
 			<th>Descripción</th>
-			<th>Mensualidad</th>
 			<th>Abonado</th>
 			<th>Liquidado</th>
 			<th>Categoria</th>
@@ -143,7 +142,7 @@ foreach($paciente["HistoriaMedica"] as $historiaMedica)
 		<td><?php echo h($tratamiento['Tratamiento']['fechaTransaccion']); ?>&nbsp;</td>
 		<td><?php echo h($tratamiento['Tratamiento']['costoTratamiento']); ?>&nbsp;</td>
 		<td><?php echo h($tratamiento['Tratamiento']['descripcion']); ?>&nbsp;</td>
-		<td><?php echo h($tratamiento['Tratamiento']['mensualidad']); ?>&nbsp;</td>
+		
 
 		<td><?php $abonado =0.0; foreach($tratamiento['Abono'] as $abono){
 			$abonado += $abono['cantidad'];

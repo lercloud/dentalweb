@@ -55,11 +55,12 @@
 												'class'=>"form-control",
 												'placeholder'=>"Apellido Materno"));
 		
-
+		
 		echo $this->Form->input('edad',array(
 												"div"=>array("class"=>"col-md-2"),
 												'class'=>"form-control",
 												'placeholder'=>"Edad"));
+		
 		//echo $this->Form->radio('sexo', array("values"=>array("1"=>"Male", "2"=>"Female")));
 		echo $this->Form->input('ocupacion',array(
 												"div"=>array("class"=>"col-md-4"),

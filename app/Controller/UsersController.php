@@ -33,8 +33,15 @@ public function admin_logout() {
 
 
 public function login() {
+
+
     if ($this->request->is('post')) {
-        if ($this->Auth->login()) {
+
+    	$usersFind = $this->User->find("first", array("conditions"=>array("User.password"=>AuthComponent::password($this->request->data['User']['password']),
+																		"OR"=>array("User.username"=>$this->request->data["User"]["username"], "User.email"=>$this->request->data["User"]["username"]))));
+
+    	
+        if ($this->Auth->login($usersFind["User"])) {
             return $this->redirect($this->Auth->redirect());
         }
         $this->Session->setFlash(__('Your username or password was incorrect.'));
@@ -140,5 +147,33 @@ public function logout() {
 		return $this->redirect(array('action' => 'index'));
 	}
 
+public function confirmAdminPass(){
+
+	if(isset($this->request->data["password"]) && $this->request->data["password"]!=""){
+	//if data send correctly
+
+		$hashPassword = AuthComponent::password($this->request->data["password"]);
+
+		if($this->User->find("first", array("conditions"=>array("User.group_id <"=>3, "User.password"=>$hashPassword )))){
+			$response["id"]=1;
+			$response["txt"]=__("Access Granted!");
+		}else{
+			$respose["id"]=0;
+			$response["txt"]=__("Incorrect Password!!");
+		}
+
+	}else{
+		//data not send correctly
+		$respose["id"]=0;
+		$response["txt"]=__("Incorrect Password!");
+
+
+	}
+
+	$this->set("response", json_encode($response));
+	$this->render('jsonresponse');
+	}
+
+	
 
 }

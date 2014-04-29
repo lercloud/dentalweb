@@ -1,0 +1,441 @@
+.tooth{
+	
+display: inline-block;
+height: 95px;
+width: 45px;
+background-color: #FF2211;
+cursor: pointer;
+background-size: contain;
+
+
+}
+
+.toothLabel{
+	text-align: center;
+}
+
+.toothHolder{
+	width: 50px;
+	display: inline-block;
+}
+
+.toothCross{
+	width: 50px;
+}
+
+.toothCross .vSide, .toothCross .pSide{
+	width: 16px;
+
+	margin: 0 auto;
+	cursor: pointer;
+	clear: both;
+}
+
+.toothCross .dSide, .toothCross .oSide, .toothCross .mSide{
+	width: 16px;
+
+	float: left;
+	cursor: pointer;
+}
+
+
+.tooth:hover{
+background-color: #1122FF;
+}
+
+
+#mouthArea{
+	width: 910px;
+	display: inline-block;
+}
+
+
+#leftArea, #rightArea{
+	width: 450px;
+	display: inline-block;
+
+}
+
+
+#leftArea .teethRow, #rightArea .teethRow{
+display: inline-block;
+
+}
+
+.teethRow5, .teethRow8{
+
+	padding-left: 162px;
+
+}
+
+.teethRow6, .teethRow7{
+
+	padding-right: 162px;
+
+}
+
+#leftArea .teethRow .tooth{
+
+}
+
+
+#rightArea .teethRow .tooth{
+
+}
+
+
+#odontogramTools{
+	display: inline-block;
+	width: 300px;
+	vertical-align: top;
+	background-size: contain;
+}
+
+#odontogramTools .tornillo{
+	display: inline-block;
+	cursor: pointer;
+	
+
+
+	background-size: contain;
+}
+
+#odontogramTools .sano{
+	display: inline-block;
+	cursor: pointer;
+
+
+	background-size: contain;
+	
+}
+
+#odontogramTools .endodoncia{
+	display: inline-block;
+	cursor: pointer;
+
+
+	background-size: contain;
+}
+
+#odontogramTools .faltante{
+	display: inline-block;
+	cursor: pointer;
+
+
+	background-size: contain;
+}
+
+
+
+.boxPresentacion{
+	-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+width: 12px;
+height: 12px;
+display: block;
+border: 1px solid #000;
+background: #FFF;
+text-align: center;
+font-size: 10px;
+line-height: 11px;
+display: inline-block;
+}
+
+
+.boxPresentacion.sano {
+background: none;
+color: black;
+}
+
+.sano {
+background: none;
+color: black;
+}
+
+
+.boxPresentacion.caries {
+background: #F00;
+color: white;
+}
+
+.caries {
+background: #F00;
+color: white;
+}
+
+
+.boxPresentacion.sellante{
+	background: #169800;
+color: white;
+}
+
+.sellante{
+	background: #169800;
+color: white;
+}
+
+
+.boxPresentacion.amalgama {
+background: #B1B1B1;
+}
+
+.amalgama {
+background: #B1B1B1;
+}
+
+.boxPresentacion.composite {
+background: #4e69a2;
+color: white;
+}
+
+.composite {
+background: #4e69a2;
+color: white;
+}
+
+.boxPresentacion.fractura {
+background: #ff6600;
+color: white;
+}
+
+.fractura {
+background: #ff6600;
+color: white;
+}
+
+.boxPresentacion.incrustacion {
+background: #98dad3;
+}
+
+.incrustacion {
+background: #98dad3;
+}
+
+
+
+
+/*Images*/
+
+/*Row 1*/
+
+.tooth11{
+	background-image: url("odontogram_images/d11.png");
+}
+
+.tooth12{
+	background-image: url("odontogram_images/d12.png");
+}
+
+.tooth13{
+	background-image: url("odontogram_images/d13.png");
+}
+
+.tooth14{
+	background-image: url("odontogram_images/d14.png");
+}
+
+.tooth15{
+	background-image: url("odontogram_images/d15.png");
+}
+
+.tooth16{
+	background-image: url("odontogram_images/d16.png");
+}
+
+.tooth17{
+	background-image: url("odontogram_images/d17.png");
+}
+
+.tooth18{
+	background-image: url("odontogram_images/d18.png");
+}
+
+/*Row 2*/
+
+.tooth21{
+	background-image: url("odontogram_images/d21.png");
+}
+
+.tooth22{
+	background-image: url("odontogram_images/d22.png");
+}
+
+.tooth23{
+	background-image: url("odontogram_images/d23.png");
+}
+
+.tooth24{
+	background-image: url("odontogram_images/d24.png");
+}
+
+.tooth25{
+	background-image: url("odontogram_images/d25.png");
+}
+
+.tooth26{
+	background-image: url("odontogram_images/d26.png");
+}
+
+.tooth27{
+	background-image: url("odontogram_images/d27.png");
+}
+
+.tooth28{
+	background-image: url("odontogram_images/d28.png");
+}
+
+/*Row 3*/
+.tooth31{
+	background-image: url("odontogram_images/d31.png");
+}
+
+.tooth32{
+	background-image: url("odontogram_images/d32.png");
+}
+
+.tooth33{
+	background-image: url("odontogram_images/d33.png");
+}
+
+.tooth34{
+	background-image: url("odontogram_images/d34.png");
+}
+
+.tooth35{
+	background-image: url("odontogram_images/d35.png");
+}
+
+.tooth36{
+	background-image: url("odontogram_images/d36.png");
+}
+
+.tooth37{
+	background-image: url("odontogram_images/d37.png");
+}
+
+.tooth38{
+	background-image: url("odontogram_images/d38.png");
+}
+
+/*Row 4*/
+
+.tooth41{
+	background-image: url("odontogram_images/d41.png");
+}
+
+.tooth42{
+	background-image: url("odontogram_images/d42.png");
+}
+
+.tooth43{
+	background-image: url("odontogram_images/d43.png");
+}
+
+.tooth44{
+	background-image: url("odontogram_images/d44.png");
+}
+
+.tooth45{
+	background-image: url("odontogram_images/d45.png");
+}
+
+.tooth46{
+	background-image: url("odontogram_images/d46.png");
+}
+
+.tooth47{
+	background-image: url("odontogram_images/d47.png");
+}
+
+.tooth48{
+	background-image: url("odontogram_images/d48.png");
+}
+
+/*Row 5*/
+
+.tooth51{
+	background-image: url("odontogram_images/d51.png");
+}
+
+.tooth52{
+	background-image: url("odontogram_images/d52.png");
+}
+
+.tooth53{
+	background-image: url("odontogram_images/d53.png");
+}
+
+.tooth54{
+	background-image: url("odontogram_images/d54.png");
+}
+
+.tooth55{
+	background-image: url("odontogram_images/d55.png");
+}
+
+/*Row 6*/
+
+.tooth61{
+	background-image: url("odontogram_images/d61.png");
+}
+
+.tooth62{
+	background-image: url("odontogram_images/d62.png");
+}
+
+.tooth63{
+	background-image: url("odontogram_images/d63.png");
+}
+
+.tooth64{
+	background-image: url("odontogram_images/d64.png");
+}
+
+.tooth65{
+	background-image: url("odontogram_images/d65.png");
+}
+
+/*Row 7*/
+
+.tooth71{
+	background-image: url("odontogram_images/d71.png");
+}
+
+.tooth72{
+	background-image: url("odontogram_images/d72.png");
+}
+
+.tooth73{
+	background-image: url("odontogram_images/d73.png");
+}
+
+.tooth74{
+	background-image: url("odontogram_images/d74.png");
+}
+
+.tooth75{
+	background-image: url("odontogram_images/d75.png");
+}
+
+/*Row 8*/
+
+.tooth81{
+	background-image: url("odontogram_images/d81.png");
+}
+
+.tooth82{
+	background-image: url("odontogram_images/d82.png");
+}
+
+.tooth83{
+	background-image: url("odontogram_images/d83.png");
+}
+
+.tooth84{
+	background-image: url("odontogram_images/d84.png");
+}
+
+.tooth85{
+	background-image: url("odontogram_images/d85.png");
+}

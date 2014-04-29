@@ -27,8 +27,19 @@
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			<li><?php echo $this->Html->link(__('Ver'), array('action' => 'view', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
 			<li><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+			
 			<li><?php echo $this->Html->link(__('Nuevo Tratamiento'), array('controller'=>'tratamientos', 'action' => 'add', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
+			<?php if(isset($paciente["lastOdontogram"])){ ?>
+
+			<li><?php echo $this->Html->link(__('Ultimo Odontograma'), array('controller'=>'odontograms', 'action' => 'index', $paciente['lastOdontogram']), array('class'=>'')); ?></li>
+
+			<?php } ?>
+
+			<li><?php echo $this->Html->link(__('Nuevo Odontograma'), array('controller'=>'odontograms', 'action' => 'newodonto', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
 			<li><?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $paciente['Paciente']['id']), array('class'=>'btn-danger', "style"=>"color:#FFF;"), __('Are you sure you want to delete # %s?', $paciente['Paciente']['id'])); ?></li>
 		</ul>
 		</div>

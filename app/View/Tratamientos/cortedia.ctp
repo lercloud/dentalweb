@@ -1,6 +1,16 @@
 <div class="pacientes index">
 	<h2><?php echo __('Corte Dia'); ?></h2>
 
+<?php
+echo $this->Form->create("Tratamiento", array("url"=>$this->Html->url(array("controller"=>"tratamientos", "action"=>"cortedia"),true)));
+
+echo $this->Form->date("date");
+echo $this->Form->end(array("class"=>"btn btn-default","label"=>"Consultar Fecha"));
+
+
+?>
+
+
 <h1>Abonos</h1>
 <table class="table table-striped">
 <tr> <th>Fecha</th><th>Paciente</th><th>Categoria - Descripcion</th><th>Metodo Pago</th><th>Abonado</th> <tr>

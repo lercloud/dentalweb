@@ -3,7 +3,48 @@ App::uses('AppController', 'Controller');
 
 class MantenimientoController extends AppController {
 
-public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMedica');
+public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMedica', 'Configuration');
+
+
+function beforeFilter() {
+    parent::beforeFilter();
+    $this->Auth->allow('sendBirthdayMessage');
+}
+
+public function sendBirthdayMessage() {
+
+App::uses('CakeEmail', 'Network/Email');
+
+			//$Email = new CakeEmail();
+			//$Email->from(array('robot@dentalarcoiris.com' => 'Dental Arcoiris'));
+			//$Email->to('numcomx@gmail.com');
+			//$Email->subject('Feliz Cumpleaños');
+			//$Email->send('Te desceamos que pases un feliz cumpleaños de parte de Dental Arcoiris');
+
+
+
+	$pacientes = $this->Paciente->find("all", array("conditions"=>array("Paciente.fechaNacimiento"=>date("Y-m-d") )));
+
+	foreach ($pacientes as $paciente) {
+		if(filter_var($paciente["Paciente"]["email"], FILTER_VALIDATE_EMAIL)){
+			//Email is correct
+
+			$Email = new CakeEmail();
+			$Email->from(array('robot@dentalarcoiris.com' => 'Dental Arcoiris'));
+			$Email->to($pacinte["Paciente"]["email"]);
+			$Email->subject('Feliz Cumpleaños');
+			$Email->send('Te desceamos que pases un feliz cumpleaños de parte de Dental Arcoiris');
+
+
+
+
+		}
+	}
+
+
+}
+
+
 
 /**
  * index method
@@ -14,6 +55,62 @@ public $uses = array('Paciente', 'AntecedentesPatologico', 'Anexos','HistoriaMed
 		//$this->Paciente->recursive = 0;
 		//$this->set('pacientes', $this->paginate());
 	}
+
+    public function configuration(){
+
+
+    	//we get the main configuration
+    		$configuration = $this->Configuration->findById(1);
+
+    		//we set main configuration if not exists
+    		if(!$configuration){
+    			$this->Configuration->create();
+    			$this->Configuration->save(array("Configuration"=>array("id"=>1, "changeType"=>12.5)));
+
+    			$configuration = $this->Configuration->findById(1);
+    		}
+
+    		$this->set("configuration", $configuration);
+    		$this->request->data = $configuration;
+    		
+    }
+
+    public function updateChageType(){
+
+
+
+    	if(isset($this->request->data["Configuration"]["changeType"]) && $this->request->data["Configuration"]["changeType"]>0){
+
+    		//we get the main configuration
+    		$configuration = $this->Configuration->findById(1);
+
+    		//we set main configuration if not exists
+    		if(!$configuration){
+    			$this->Configuration->create();
+    			$this->Configuration->save(array("Configuration"=>array("id"=>1, "changeType"=>12.5)));
+
+    			$configuration = $this->Configuration->findById(1);
+    		}
+
+    		//we save new configuration
+    		$this->Configuration->id = 1;
+    		if($this->Configuration->save(array("Configuration"=>array("id"=>1, "changeType"=>$this->request->data["Configuration"]["changeType"])))){
+
+    			$this->Session->setFlash(__('Change Saved'));
+    			return $this->redirect(array('action' => 'configuration'));
+
+    		}else{
+    			$this->Session->setFlash(__('Unable to update change type.'));
+    			return $this->redirect(array('action' => 'configuration'));
+    		}
+
+
+    	}else{
+    		throw new Exception("Error Processing Request", 1);
+    		
+    	}
+
+    }
 
 
 	public function migracion(){

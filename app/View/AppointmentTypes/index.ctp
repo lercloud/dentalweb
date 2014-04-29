@@ -39,8 +39,8 @@
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Appointment Type'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List Appointments'), array('controller' => 'appointments', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Appointments'), array('controller' => 'appointments', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nueva Razon Cita'), array('action' => 'add')); ?></li>
+		<li><?php echo $this->Html->link(__('Ver Calendario Citas'), array('controller' => 'appointments', 'action' => 'index')); ?> </li>
+
 	</ul>
 </div>

@@ -1,6 +1,8 @@
 
 
 <div class="pacientes index">
+
+	
 	<h2><?php echo __('Pacientes'); ?></h2>
 <?php 
 echo $this->Form->input("buscarPaciente",array(
@@ -22,6 +24,7 @@ echo $this->Form->input("buscarPaciente",array(
 			<th><?php echo $this->Paginator->sort('telefono'); ?></th>
 			<th><?php echo $this->Paginator->sort('celular'); ?></th>
 			<th><?php echo $this->Paginator->sort('nextel'); ?></th>
+			<th><?php echo $this->Paginator->sort('Ultima Visita'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($pacientes as $paciente): ?>
@@ -34,6 +37,15 @@ echo $this->Form->input("buscarPaciente",array(
 		<td><?php echo h($paciente['Paciente']['telefono']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['celular']); ?>&nbsp;</td>
 		<td><?php echo h($paciente['Paciente']['nextel']); ?>&nbsp;</td>
+		<td><?php 
+
+		if(count($paciente["Tratamiento"])<=0){
+			echo __("No hay registro");
+		}else{
+			echo $paciente["Tratamiento"][0]["fechaTransaccion"];
+		}
+
+		?>&nbsp;</td>
 		<td class="actions ">
 			<div class="btn-group">
 			  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -41,8 +53,19 @@ echo $this->Form->input("buscarPaciente",array(
 			  </button>
 			  <ul class="dropdown-menu" role="menu">
 			<li><?php echo $this->Html->link(__('Ver'), array('action' => 'view', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
 			<li><?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
 			<li><?php echo $this->Html->link(__('Nuevo Tratamiento'), array('controller'=>'tratamientos', 'action' => 'add', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
+			<?php if(isset($paciente["lastOdontogram"])){ ?>
+
+			<li><?php echo $this->Html->link(__('Ultimo Odontograma'), array('controller'=>'odontograms', 'action' => 'index', $paciente['lastOdontogram']), array('class'=>'')); ?></li>
+
+			<?php } ?>
+
+			<li><?php echo $this->Html->link(__('Nuevo Odontograma'), array('controller'=>'odontograms', 'action' => 'newodonto', $paciente['Paciente']['id']), array('class'=>'')); ?></li>
+
 			<li><?php echo $this->Form->postLink(__('Borrar'), array('action' => 'delete', $paciente['Paciente']['id']), array('class'=>'btn-danger', "style"=>"color:#FFF;"), __('Are you sure you want to delete # %s?', $paciente['Paciente']['id'])); ?></li>
 		</ul>
 		</div>

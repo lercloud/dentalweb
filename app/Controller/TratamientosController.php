@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class TratamientosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "User");
 
 /**
  * index method
@@ -18,15 +18,22 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		$this->Tratamiento->recursive = 1;
 		$this->Paciente->recursive = 2;
 
-		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
+		$this->set('pacientes', $this->paginate());
 	}
 
 
 
 	public function cortedia(){
 
+		$fechaSeleccionada = date("Y-m-d");
+
+		if(isset($this->request->data["Tratamiento"]["date"]) && $this->request->data["Tratamiento"]["date"]!=""){
+			$fechaSeleccionada = $this->request->data["Tratamiento"]["date"];
+		}
+
+
 			$this->Abono->recursive = 2;
-		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"), "Abono.branch_id"=>$this->Session->read("Auth.User.branch_id")))); //, "Usuario.id"=>$this->Session->read("sucursal")    //   , "Abono.sucursal_id"=>$this->Session->read("sucursal")
+		$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>$fechaSeleccionada, "Abono.branch_id"=>$this->Session->read("Auth.User.branch_id")))); //, "Usuario.id"=>$this->Session->read("sucursal")    //   , "Abono.sucursal_id"=>$this->Session->read("sucursal")
 		//$abonos = $this->Abono->find("all",array("conditions"=>array("Abono.fechaTransaccion"=>date("Y-m-d"))));
 		$this->set("abonos",$abonos);
 	}
@@ -41,7 +48,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		$this->Paciente->recursive = 2;
 		
 		$conditions = array("OR" => array(
-      	"Paciente.nombre LIKE" => $this->request->data["datasearch"]."%",
+      	"Paciente.nombre LIKE" => "%".$this->request->data["datasearch"]."%",
         "Paciente.apellido_paterno LIKE" => $this->request->data["datasearch"]."%",
         "Paciente.apellido_materno LIKE" => $this->request->data["datasearch"]."%")
     );
@@ -98,7 +105,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 
 			if ($this->Tratamiento->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The tratamiento has been saved'));
-				return $this->redirect(array('action' => 'index'));
+				return $this->redirect(array('action' => 'view', "controller"=>"pacientes", $pacienteid));
 			} else {
 				$this->Session->setFlash(__('The tratamiento could not be saved. Please, try again.'));
 			}
@@ -125,20 +132,79 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 		if (!$this->Tratamiento->exists($id)) {
 			throw new NotFoundException(__('Invalid tratamiento'));
 		}
+
+
+
+$tratamiento = $this->Tratamiento->findById($id);
+
 		if ($this->request->is('post') || $this->request->is('put')) {
-			if ($this->Tratamiento->save($this->request->data)) {
-				$this->Session->setFlash(__('The tratamiento has been saved'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The tratamiento could not be saved. Please, try again.'));
+
+			$canEdit = false;
+			$canEdit = $this->authUserValidation($this->request->data);
+
+
+
+
+			if($canEdit){
+				//can edit
+				if ($this->Tratamiento->save($this->request->data)) {
+					$this->Session->setFlash(__('The tratamiento has been saved'));
+					return $this->redirect(array('action' => 'index'));
+				} else {
+					$this->Session->setFlash(__('The tratamiento could not be saved. Please, try again.'));
+				}
+			}else
+			{
+				//cant edit
+				$this->Session->setFlash(__('Favor de introducir contraseña de administrador correcta.'));
 			}
-		} else {
-			$options = array('conditions' => array('Tratamiento.' . $this->Tratamiento->primaryKey => $id));
-			$this->request->data = $this->Tratamiento->find('first', $options);
-		}
-		$doctors = $this->Tratamiento->Doctor->find('list');
+
+			}else {
+				//not post
+				$options = array('conditions' => array('Tratamiento.' . $this->Tratamiento->primaryKey => $id));
+				$this->request->data = $this->Tratamiento->find('first', $options);
+			}
+	
+		$this->Paciente->recursive = 0;
+		$this->set("paciente",$this->Paciente->find('first', array('conditions'=>array("Paciente.id"=>$tratamiento["Tratamiento"]["paciente_id"]))));
+
+		//Busqueda y set de doctores
+		$doctors = $this->Tratamiento->Doctor->find('list', array("fields"=>array("id","nombre")));
 		$this->set(compact('doctors'));
+		//$this->set("variable", 5);
 	}
+
+private function authUserValidation($data){
+
+if( $this->Session->read("Auth.User.group_id")>=3){
+				//Cant edit
+
+				if(!isset($data["User"]["password"]) || $data["User"]["password"]=="" || $data["User"]["password"]==null)
+				{
+					return false;
+				}else{
+
+					$hashPassword = AuthComponent::password($data["User"]["password"]);
+					//$hashPassword = $data["User"]["password"];
+
+					if($this->User->find("first", array("conditions"=>array("User.group_id <"=>3, "User.password"=>$hashPassword )))){
+						return true;
+
+					}else{
+						return false;
+					}
+
+				}
+
+			}else{
+				//Is admin can edit
+				return true;
+
+			}
+
+
+}
+
 
 /**
  * delete method
@@ -150,7 +216,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
  */
 	public function delete($id = null) {
 		$this->Tratamiento->id = $id;
-		if (!$this->Tratamiento->exists()) {
+		if (!$this->Tratamiento->exists($id)) {
 			throw new NotFoundException(__('Invalid tratamiento'));
 		}
 		$this->request->onlyAllow('post', 'delete');
@@ -160,5 +226,23 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario")
 			$this->Session->setFlash(__('The tratamiento could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
+	}
+
+	public function deleteAjax($id = null) {
+		$this->Tratamiento->id = $id;
+		if (!$this->Tratamiento->exists($id)) {
+			throw new NotFoundException(__('Invalid tratamiento'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Tratamiento->delete()) {
+			$respose["id"]=1;
+			$response["txt"]=__("Deleted!");
+		} else {
+			$respose["id"]=0;
+			$response["txt"]=__("Cant delete");
+		}
+		
+		$this->set("response", json_encode($response));
+		$this->render('jsonresponse');
 	}
 }

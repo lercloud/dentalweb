@@ -14,9 +14,25 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  * @return void
  */
 	public function index() {
-		$this->Paciente->recursive = 0;
-		//;
-		$this->set('pacientes', $this->Paciente->find('all'),$this->paginate());
+
+		$this->Paciente->recursive = 1;
+
+		$results = $this->Paciente->find('all');
+
+		//set last odontogram
+
+		foreach ($results as $key => $result) {
+			
+			if(count($results[$key]["Odontogram"])>0)
+			{
+				$count = count($results[$key]["Odontogram"]);
+				$results[$key]["lastOdontogram"] = $results[$key]["Odontogram"][$count-1]["id"];
+			}
+
+
+		}
+
+		$this->set('pacientes', $this->paginate());
 	}
 
 	/**
@@ -42,15 +58,32 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
  */
 	public function buscarajax() {
 		$this->layout = 'ajax';
-		$this->Paciente->recursive = 0;
+		$this->Paciente->recursive = 1;
 		
 		$conditions = array("OR" => array(
-      	"Paciente.nombre LIKE" => $this->request->data["datasearch"]."%",
+      	"Paciente.nombre LIKE" => "%".$this->request->data["datasearch"]."%",
         "Paciente.apellido_paterno LIKE" => $this->request->data["datasearch"]."%",
         "Paciente.apellido_materno LIKE" => $this->request->data["datasearch"]."%")
     );
 
-		$this->set('pacientes',$this->paginate($conditions));
+
+		$results = $this->Paciente->find("all", array("conditions"=>$conditions));
+
+		foreach ($results as $key => $result) {
+			
+			if(count($results[$key]["Odontogram"])>0)
+			{
+				$count = count($results[$key]["Odontogram"]);
+				$results[$key]["lastOdontogram"] = $results[$key]["Odontogram"][$count-1]["id"];
+			}
+
+
+		}
+
+		
+
+		//$this->set('pacientes',$this->paginate($conditions));
+		$this->set("pacientes",  $results,$this->paginate());
 	}
 
 /**
@@ -85,6 +118,11 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
 
 		if ($this->request->is('post')) {
 			$this->Paciente->create();
+
+			$this->request->data["Paciente"]["nombre"] = strtoupper($this->request->data["Paciente"]["nombre"]);
+			$this->request->data["Paciente"]["apellido_paterno"] = strtoupper($this->request->data["Paciente"]["apellido_paterno"]);
+			$this->request->data["Paciente"]["apellido_materno"] = strtoupper($this->request->data["Paciente"]["apellido_materno"]);
+
 			if ($this->Paciente->save($this->request->data)) {
 				$this->Session->setFlash(__('The paciente has been saved'));
 				return $this->redirect(array('action' => 'index'));
@@ -112,6 +150,11 @@ public $uses = array("Paciente", "Patologia", "Tratamiento");
 		$this->Paciente->create();
 		$this->Paciente->id = $id;
 		if ($this->request->is('post') || $this->request->is('put')) {
+
+			$this->request->data["Paciente"]["nombre"] = strtoupper($this->request->data["Paciente"]["nombre"]);
+			$this->request->data["Paciente"]["apellido_paterno"] = strtoupper($this->request->data["Paciente"]["apellido_paterno"]);
+			$this->request->data["Paciente"]["apellido_materno"] = strtoupper($this->request->data["Paciente"]["apellido_materno"]);
+			
 			if ($this->Paciente->saveAll($this->request->data)) {
 				$this->Session->setFlash(__('The paciente has been saved'));
 				return $this->redirect(array('action' => 'index'));

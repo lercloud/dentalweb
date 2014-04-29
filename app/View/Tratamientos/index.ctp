@@ -129,7 +129,9 @@ foreach ($pacientes as $paciente){
 		<td class="actions">
 
 			<?php echo $this->Html->link(__('Detalles'), array('action' => 'view', 'controller'=>"tratamientos", $tratamiento['id'])); ?>
+			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', 'controller'=>"tratamientos", $tratamiento['id'])); ?>
 			<?php echo $this->Html->link(__('Abonar'), array('action' => 'add', 'controller'=>"abonos", $tratamiento['id'])); ?>
+			<?php echo $this->Form->postLink(__('Borrar'), array('action' => 'deleteAjax', $tratamiento['id']), array('class'=>'btn-danger postLinkOverride', "style"=>"color:#FFF;"), __('Are you sure you want to delete # %s?', $tratamiento['id'])); ?>
 
 		</td>
 	</tr>

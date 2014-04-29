@@ -12,7 +12,8 @@ class Paciente extends AppModel {
 
 
 	public $virtualFields = array(
-"fullName" => "CONCAT(Paciente.nombre,' ',Paciente.apellido_paterno,' ',Paciente.apellido_materno)"
+"fullName" => "CONCAT(Paciente.nombre,' ',Paciente.apellido_paterno,' ',Paciente.apellido_materno)",
+"age"=>"DATE_FORMAT(NOW(), '%Y') - DATE_FORMAT(Paciente.fechaNacimiento, '%Y') - (DATE_FORMAT(NOW(), '00-%m-%d') < DATE_FORMAT(Paciente.fechaNacimiento, '00-%m-%d'))"
 );
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -69,11 +70,18 @@ class Paciente extends AppModel {
 			'foreignKey' => 'paciente_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => 'Tratamiento.fechaTransaccion DESC'
 		)
 		,
 		'Appointment' => array(
 			'className' => 'Appointment',
+			'foreignKey' => 'paciente_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Odontogram' => array(
+			'className' => 'Odontogram',
 			'foreignKey' => 'paciente_id',
 			'conditions' => '',
 			'fields' => '',

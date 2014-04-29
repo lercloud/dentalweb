@@ -51,16 +51,15 @@ echo $this->Form->button(__("Search By Doctor"), array("type"=>"button",
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New Appointment'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('List AppointmentTypes'), array('controller' => 'appointmentTypes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Appointment Types'), array('controller' => 'appointmentTypes', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Ver Razones de citas'), array('controller' => 'appointmentTypes', 'action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Nueva Razon de Cita'), array('controller' => 'appointmentTypes', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
 
 
 
 <!-- Modal -->
-<div class="modal fade" id="addAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="addAppointmentModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -81,13 +80,13 @@ echo $this->Form->button(__("Search By Doctor"), array("type"=>"button",
 		//echo $this->Form->input('id');
 		echo $this->Form->input('paciente_id',array(
 						"div"=>array("class"=>"col-md-6"),
-						'class'=>"form-control",
+						'class'=>"select2",
 						"id"=>"addAppoinmentPacienteIdField",
 						'placeholder'=>__("Pacient")));
 
 		echo $this->Form->input('doctor_id',array(
 						"div"=>array("class"=>"col-md-6"),
-						'class'=>"form-control",
+						'class'=>"select2",
 						"id"=>"addAppoinmentDoctorIdField",
 						'placeholder'=>__("Doctor")));
 
@@ -100,8 +99,9 @@ echo $this->Form->button(__("Search By Doctor"), array("type"=>"button",
 		echo $this->Form->input('appointment_types_id',array(
 						"div"=>array("class"=>"col-md-6"),
 						'class'=>"form-control",
+						"label"=>"Razon Cita",
 						"id"=>"addAppoinmentAppointmentTypeIdField",
-						'placeholder'=>__("Appointment Type")));
+						'placeholder'=>__("Razon Cita")));
 		echo '<br>';
 		echo '<div class="col-md-12" style="clear:both;" >';
 		echo $this->Form->label(__("Date"));
@@ -120,6 +120,7 @@ echo $this->Form->button(__("Search By Doctor"), array("type"=>"button",
 		echo $this->Form->input('time',array(
 						"type"=>"time",
 						"timeFormat"=>"24",
+						'interval' => 15,
 						"div"=>array("class"=>"", "style"=>"clear:both;"),
 						'class'=>"form-control",
 						"label"=>false,
@@ -133,6 +134,7 @@ echo $this->Form->button(__("Search By Doctor"), array("type"=>"button",
 		echo $this->Form->input('time',array(
 						"type"=>"time",
 						"timeFormat"=>"24",
+						'interval' => 15,
 						"div"=>array("class"=>"", "style"=>"clear:both;"),
 						'class'=>"form-control",
 						"label"=>false,

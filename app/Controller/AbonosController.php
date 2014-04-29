@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
  */
 class AbonosController extends AppController {
 
-public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario", "Sucursal");
+public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario", "Sucursal", "Configuration");
 
 /**
  * index method
@@ -54,6 +54,18 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario",
 			$this->request->data["Abono"]["branch_id"] = $this->Session->read("Auth.User.branch_id");
 			$this->request->data["Abono"]["user_id"] = $this->Session->read("Auth.User.id");
 
+			//Check currency
+			if($this->request->data["Abono"]["metodoPago"] == "Dolar"){
+
+				$configuration = $this->Configuration->findById(1);
+
+				$this->request->data["Abono"]["foreignQty"] = $this->request->data["Abono"]["cantidad"];
+				$this->request->data["Abono"]["changeType"] = $configuration["Configuration"]["changeType"];
+				$this->request->data["Abono"]["cantidad"] = $this->request->data["Abono"]["cantidad"]*$configuration["Configuration"]["changeType"];
+				
+			}
+
+
 			$abonado = 0;
 				foreach ($tratamiento["Abono"] as $abono) {
 					$abonado += $abono["cantidad"];
@@ -85,7 +97,7 @@ public $uses = array("Paciente", "Patologia", "Tratamiento", "Abono", "Usuario",
 						}else
 							$this->Session->setFlash(__('The abono ha sido guardado'));
 					
-					return $this->redirect(array('action' => 'view', 'controller'=>'tratamientos',$id));
+					return $this->redirect(array('action' => 'view', 'controller'=>'pacientes',$tratamiento["Tratamiento"]["paciente_id"]));
 			
 						} else {
 							$this->Session->setFlash(__('El abono no pudo ser guardado.'));

@@ -9,7 +9,7 @@ $abonado = 0;
 <div class="abonos form view">
 <?php echo $this->Form->create('Abono'); ?>
 	<fieldset>
-		<legend><?php echo __('Agregar Abono'); ?></legend>
+		<legend><?php echo __('Agregar Abono').$this->Session->read("Auth.User.branch_id"); ?></legend>
 		<div class="col-md-12 alert alert-warning" >Pendiente por pagar: $ <?php echo ($tratamiento['Tratamiento']['costoTratamiento']-$abonado); ?></div>
 	<?php
 		echo $this->Form->input('id');
@@ -22,6 +22,8 @@ $abonado = 0;
 				'class'=>"form-control",
 				'required'=>true
 				));
+
+		
 
 		echo $this->Form->input('doctor_id', array(
 												"div"=>array("class"=>"col-md-7"),

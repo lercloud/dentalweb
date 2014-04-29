@@ -87,22 +87,306 @@ body {
         echo $this->Html->css('/fullcalendar/fullcalendar/fullcalendar');
         echo $this->Html->css('/jquery-ui/themes/base/jquery-ui');
 
+        echo $this->Html->css('odontogram');
+
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
         echo $this->fetch('bootstrap-datetimepicker.min');
 
+        echo $this->Html->script('/jquery-ui/jquery-1.10.2');
         echo $this->Html->script('bootstrap.min');
         echo $this->Html->script('customjs');
         echo $this->Html->script('/select2/select2');
         echo $this->Html->script('/fullcalendar/fullcalendar/fullcalendar');
         echo $this->Html->script('/jquery-ui/ui/jquery-ui');
+
 	?>
 
 <script>
+
+
+function initOdontogram(odontogramId){
+    
+
+
+
+$("#progressBar").css({
+                  'visibility': 'visible'
+                });
+
+    $.ajax({
+        url: '<?php echo $this->Html->url(array("controller"=>"odontograms", "action"=>"retrieve")) ?>',
+        type: 'POST',
+        dataType: 'json',
+        data: {odontogramId: odontogramId},
+    })
+    .done(function(data) {
+        console.log("success");
+
+        constructOdontogram(data.odontogram);
+
+        $("#progressBar").css({
+                  'visibility': 'hidden'
+                });
+    })
+    .fail(function() {
+        console.log("error");
+    })
+    .always(function() {
+        console.log("complete");
+    });
+    
+
+}
+
+
+function constructOdontogram(odontogram){
+
+var odontogramId = odontogram.Odontogram.id;
+
+$("#odontogramPacientName").html(odontogram.Paciente.fullName);
+$("#odontogramOdontoNumber").html(odontogram.Odontogram.id);
+$("#odontogramDate").html(odontogram.Odontogram.created);
+$("#odontogramlastUpdate").html(odontogram.Odontogram.modified);
+
+
+for(x=0; x<odontogram.Tooth.length; x++){
+
+    if(odontogram.Tooth[x].status == 1){
+            $(".tooth"+odontogram.Tooth[x].toothNumber).html('<?php echo $this->Html->image("/css/odontogram_images/tornillo_sup.png", array("heigth"=>95, "width"=>45)); ?>');
+}
+
+        if(odontogram.Tooth[x].status == 2){
+            $(".tooth"+odontogram.Tooth[x].toothNumber).html('<?php echo $this->Html->image("/css/odontogram_images/endodoncia.png", array("heigth"=>95, "width"=>45)); ?>');    
+        }
+
+        if(odontogram.Tooth[x].status == 3){
+            $(".tooth"+odontogram.Tooth[x].toothNumber).html('<?php echo $this->Html->image("/css/odontogram_images/cross.png", array("heigth"=>95, "width"=>45)); ?>'); 
+        }
+
+        if(odontogram.Tooth[x].status == 4){
+            //Remove all colors
+        $(".tooth"+odontogram.Tooth[x].toothNumber).html('');
+        //$(".tooth"+odontogram.Tooth.toothNumber).addClass(sidePresentacion);
+        }
+
+
+        sideClases = new Array();
+        sideClases[0] = "sano";
+        sideClases[1] = "sano";
+        sideClases[2] = "caries";
+        sideClases[3] = "sellante";
+        sideClases[4] = "amalgama";
+        sideClases[5] = "composite";
+        sideClases[6] = "fractura";
+        sideClases[7] = "incrustacion";
+
+        $("#vSide"+odontogram.Tooth[x].toothNumber).addClass(sideClases[odontogram.Tooth[x].vSide]);
+        $("#dSide"+odontogram.Tooth[x].toothNumber).addClass(sideClases[odontogram.Tooth[x].dSide]);
+        $("#oSide"+odontogram.Tooth[x].toothNumber).addClass(sideClases[odontogram.Tooth[x].oSide]);
+        $("#mSide"+odontogram.Tooth[x].toothNumber).addClass(sideClases[odontogram.Tooth[x].mSide]);
+        $("#pSide"+odontogram.Tooth[x].toothNumber).addClass(sideClases[odontogram.Tooth[x].pSide]);
+
+
+
+    }//end for
+
+
+}
+
+
         $(document).ready(function() {
 
+
+$("#PacienteFechaNacimiento").change(function(){
+
+    var today=new Date();
+var dob=new Date($("#PacienteFechaNacimiento").val());
+var age=today.getFullYear()-dob.getFullYear();
+$("#PacienteEdad").val(age);
+    
+
+});
+
+/* Odontogram JS */
+
+var sidePresentacion = "";
+var pacientId = "";
+
+
+
+
+
+function updateOdontogram(toothId, action, value){
+
+$("#progressBar").css({
+                  'visibility': 'visible'
+                });
+
+$.ajax({
+    url: '<?php echo $this->Html->url(array("controller"=>"odontograms", "action"=>"update")); ?>',
+    type: 'POST',
+    dataType: 'json',
+    data: {odontogramId: odontogramId, toothId: toothId, action:action, value: value},
+})
+.done(function(data) {
+    console.log("success");
+    $("#progressBar").css({
+                  'visibility': 'hidden'
+                });
+})
+.fail(function() {
+    console.log("error");
+})
+.always(function() {
+    console.log("complete");
+});
+
+
+
+}
+
+
+$(".odontogramToolPresentacion").click(function(event) {
+    /* Act on the event */
+
+sidePresentacion = $(this).val();
+
+});
+
+$( "#odontogramTools .odontogramTool" ).draggable({
+      appendTo: "body",
+      helper: "clone"
+    });
+
+$(".vSide, .dSide, .oSide, .mSide, .pSide").click(function(event) {
+    /* Act on the event */
+
+    if(sidePresentacion!=""){
+
+
+        //Remove all colors
+        $(this).removeClass('sano');
+        $(this).removeClass('caries');
+        $(this).removeClass('sellante');
+        $(this).removeClass('amalgama');
+        $(this).removeClass('composite');
+        $(this).removeClass('fractura');
+        $(this).removeClass('incrustacion');
+
+        toothId = $(this).attr('data-toothId');
+        sideId = $(this).attr('data-sideId');
+
+        updateOdontogram(toothId, sideId, sidePresentacion);
+        $(this).addClass(sidePresentacion);
+
+
+    }
+});
+
+
+
+
+
+$( ".tooth" ).droppable({
+      activeClass: "ui-state-default",
+      hoverClass: "ui-state-hover",
+
+      drop: function( event, ui ) {
+        $( this ).find( ".placeholder" ).remove();
+        //$( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+
+            toolId = ui.draggable.attr('data-toolId');
+            toothId = $(this).attr('data-toothId');
+            
+            if(toolId == "sano"){
+            $(this).html("");
+
+
+            //Remove all colors
+        $(".toothCross"+toothId+" div").removeClass('caries');
+        $(".toothCross"+toothId+" div").removeClass('sellante');
+        $(".toothCross"+toothId+" div").removeClass('amalgama');
+        $(".toothCross"+toothId+" div").removeClass('composite');
+        $(".toothCross"+toothId+" div").removeClass('fractura');
+        $(".toothCross"+toothId+" div").removeClass('incrustacion');
+
+        updateOdontogram(toothId, "status", toolId);
+
+            }
+
+        if(toolId == "tornillo"){
+            $(this).html('<?php echo $this->Html->image("/css/odontogram_images/tornillo_sup.png", array("heigth"=>95, "width"=>45)); ?>');
+
+            updateOdontogram(toothId, "status", toolId);
+
+        }
+
+        if(toolId == "endodoncia"){
+            $(this).html('<?php echo $this->Html->image("/css/odontogram_images/endodoncia.png", array("heigth"=>95, "width"=>45)); ?>');
+            updateOdontogram(toothId, "status", toolId);
+        }
+
+        if(toolId == "faltante"){
+            $(this).html('<?php echo $this->Html->image("/css/odontogram_images/cross.png", array("heigth"=>95, "width"=>45)); ?>');
+            updateOdontogram(toothId, "status", toolId);
+        }
+
+
+      }
+    })
+
+
+
+
+
+
+
+
             $(".select2").select2();
+
+            //postLink override
+
+               $('a.postLinkOverride').removeAttr('onclick');
+
+                $('a.postLinkOverride').click(function(e){
+                    e.preventDefault();
+
+                    var password = prompt("<?php echo __('Introduce contrasena de Admin'); ?>");
+                     var form = $(this).prev();
+                        formUrl = $(form).attr("action");
+
+                    $.ajax({
+                        url: '<?php echo $this->Html->url(array("controller"=>"users", "action"=>"confirmAdminPass"), true); ?>',
+                        type: 'POST',
+                        dataType: 'JSON',
+                        data: {password: password},
+                    })
+                    .done(function(data) {
+                        console.log("success");
+
+                        if(data.id == 1){
+                            $.post(formUrl);
+                        }else{
+                            alert("Contraseña incorrecta");
+                        }
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    })
+                    .always(function() {
+                        console.log("complete");
+                    });
+                    
+
+                    //var form = $(this).prev();
+                    //url = $(form).attr("action");
+                   //$.post(url);
+                   // return false;
+                });
+
+
 
             $("#searchByBranch").click(function(event) {
                 /* Act on the event */
@@ -620,7 +904,7 @@ body {
 	</div>
 <footer>
     
-	<?php //echo $this->element('sql_dump'); ?>
+	<?php echo $this->element('sql_dump'); ?>
         <?php 
     //if($this->Session->read("var1")!='') echo print_r($this->Session->read("var1"),true);
     //if($this->Session->read("var2")!='') echo print_r($this->Session->read("var2"),true);

@@ -160,6 +160,29 @@ public function retriveById() {
 				$response["id"]=1;
 				$response["txt"]=__("Appointment register succcess");
 				$response["appointment"]=$appointmentJson;
+
+				$paciente = $this->Paciente->findById($appointmentData["Appointment"]["paciente_id"]);
+
+				$appointment = $this->Appointment->findById($this->Appointment->id);
+
+				//Send Appointment via email
+				App::uses('CakeEmail', 'Network/Email');
+
+				$Email = new CakeEmail();
+			$Email->from(array('robot@dentalarcoiris.com' => 'Dental Arcoiris'));
+			$Email->to($pacinte["Paciente"]["email"]);
+			$Email->subject('Cita Programada');
+
+			$texto = "";
+			$texto .= "Hola ".$paciente["Paciente"]["fullName"]."\n";
+			$texto .= "Tienes una cita programada el dia".$appointment["Appointment"]["date"]."\n";
+			$texto .= "De: ".$appointment["Appointment"]["time"]." a ".$appointment["Appointment"]["end_time"]."\n";
+			$texto .= "Esperamos verte al dia y hora programada."."\n";
+			$texto .= "Saludos."
+
+			$Email->send($texto);
+
+
 			} else {
 				$response["id"]=0;
 				$response["txt"]=__("The appointment could not be saved. Please, try again.");
